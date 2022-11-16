@@ -29,6 +29,14 @@ Future<T?> showCustomModalBottomSheet<T>({
             context,
           ).size.height *
           0.9,
+      maxWidth: 1000,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(
+          ApplicationTheme.borderRadius,
+        ),
+      ),
     ),
     builder: (
       BuildContext context,
