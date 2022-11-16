@@ -11,6 +11,17 @@ class _BlocProviders extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return child;
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (
+            BuildContext context,
+          ) {
+            return ThemeBloc();
+          },
+        ),
+      ],
+      child: child,
+    );
   }
 }

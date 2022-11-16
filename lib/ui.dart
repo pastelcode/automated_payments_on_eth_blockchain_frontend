@@ -7,16 +7,22 @@ class _Ui extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return MaterialApp(
-      title: 'Automated payments on ETH blockchain',
-      scrollBehavior: const _ScrollBehaviorModified(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Automated payments on ETH blockchain',
-          ),
-        ),
-      ),
+    final applicationRouter = ApplicationRouter();
+
+    return BlocBuilder<ThemeBloc, ThemeMode>(
+      builder: (
+        BuildContext context,
+        ThemeMode themeMode,
+      ) {
+        return MaterialApp.router(
+          title: 'Automated payments on ETH blockchain',
+          scrollBehavior: const _ScrollBehaviorModified(),
+          routerConfig: applicationRouter.router,
+          theme: ApplicationTheme.lightTheme,
+          darkTheme: ApplicationTheme.darkTheme,
+          themeMode: themeMode,
+        );
+      },
     );
   }
 }
