@@ -1,16 +1,15 @@
-# automated_payments_on_eth_blockchain_frontend
+## Compile
 
-A new Flutter project.
+```bash
+chmod +x ./compile
 
-## Getting Started
+./compile [apk/appbundle/ios/ipa]
+```
 
-This project is a starting point for a Flutter application.
+## Generate assets
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+chmod +x ./generate_assets
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+./generate_assets
+```
