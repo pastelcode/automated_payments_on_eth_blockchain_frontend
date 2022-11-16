@@ -1,4 +1,6 @@
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/home.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 part 'routes.dart';
@@ -28,6 +30,12 @@ class ApplicationRouter {
       GoRoute(
         name: Routes.home.name,
         path: Routes.home.path,
+        builder: (
+          BuildContext context,
+          GoRouterState state,
+        ) {
+          return const HomePage();
+        },
       ),
     ],
   );
