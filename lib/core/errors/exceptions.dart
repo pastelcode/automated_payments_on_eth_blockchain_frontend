@@ -8,7 +8,7 @@ abstract class _CustomException extends _BaseError implements Exception {
   _CustomException({
     required super.message,
   }) : super(
-          type: _ErrorTypes.exception,
+          type: _ErrorType.exception,
         );
 }
 

@@ -8,7 +8,7 @@ abstract class Failure extends _BaseError {
   Failure({
     required super.message,
   }) : super(
-          type: _ErrorTypes.failure,
+          type: _ErrorType.failure,
         );
 }
 

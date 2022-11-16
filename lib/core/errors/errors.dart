@@ -8,7 +8,7 @@ part 'failures.dart';
 /// {@template error_type}
 /// An enum to represent the different types of errors this application has.
 /// {@endtemplate}
-enum _ErrorTypes {
+enum _ErrorType {
   /// The exception type.
   exception,
 
@@ -16,7 +16,7 @@ enum _ErrorTypes {
   failure;
 
   /// {@macro error_type}
-  const _ErrorTypes();
+  const _ErrorType();
 }
 
 /// {@template base_error}
@@ -29,7 +29,7 @@ abstract class _BaseError extends Equatable {
   /// {@macro base_error}
   _BaseError({
     required this.message,
-    required _ErrorTypes type,
+    required _ErrorType type,
   }) {
     log(
       toString(),
