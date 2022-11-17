@@ -15,9 +15,16 @@ class _BlocProviders extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (
-            BuildContext context,
+            _,
           ) {
             return ThemeBloc();
+          },
+        ),
+        BlocProvider(
+          create: (
+            _,
+          ) {
+            return SignAndExecuteContractBloc();
           },
         ),
       ],
