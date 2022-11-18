@@ -50,7 +50,6 @@ class _Lapseds extends StatelessWidget {
                     const Spacer(),
                     Button(
                       onPressed: () {},
-                      isPrimary: true,
                       title: Text(
                         state.lapseds.isEmpty ? 'Set up' : 'View',
                       ),

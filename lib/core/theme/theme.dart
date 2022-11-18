@@ -37,9 +37,8 @@ mixin ApplicationTheme {
     final buttonStyle = TextButton.styleFrom(
       foregroundColor: colorScheme.onSurface,
       elevation: 0,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
+      padding: const EdgeInsets.all(
+        20,
       ),
     );
 

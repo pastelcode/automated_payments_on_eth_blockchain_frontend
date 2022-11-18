@@ -59,7 +59,10 @@ class Button extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          foregroundColor: isPrimary ? theme.colorScheme.primary : null,
+          foregroundColor: isPrimary
+              ? theme.colorScheme.onPrimary
+              : theme.colorScheme.primary,
+          backgroundColor: isPrimary ? theme.colorScheme.primary : null,
         ),
         child: isVertical
             ? Column(
