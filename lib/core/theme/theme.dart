@@ -56,9 +56,11 @@ mixin ApplicationTheme {
       useMaterial3: true,
       fontFamily: FontFamily.inter,
       appBarTheme: AppBarTheme(
-        centerTitle: true,
+        centerTitle: false,
         toolbarHeight: appBarHeight,
-        backgroundColor: colorScheme.surface,
+        backgroundColor: colorScheme.surfaceVariant.withOpacity(
+          .5,
+        ),
       ),
       canvasColor: colorScheme.surfaceVariant,
       scaffoldBackgroundColor: colorScheme.surface,

@@ -29,7 +29,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
               'Automated Payments on',
