@@ -32,3 +32,13 @@ class ServerFailure extends Failure {
         },
       ];
 }
+
+/// {@template another_failure}
+/// An unknown failure.
+/// {@endtemplate}
+class AnotherFailure extends Failure {
+  /// {@macro another_failure}
+  AnotherFailure({
+    required super.message,
+  });
+}
