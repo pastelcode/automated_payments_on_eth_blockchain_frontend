@@ -34,7 +34,7 @@ abstract class _BaseError extends Equatable {
     log(
       toString(),
       name: type.name,
-      stackTrace: StackTrace.current,
+      stackTrace: type == _ErrorType.exception ? StackTrace.current : null,
     );
   }
 
