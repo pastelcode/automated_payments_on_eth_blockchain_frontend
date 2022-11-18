@@ -7,7 +7,9 @@ mixin ApplicationTheme {
   static double get borderRadius => 10;
 
   /// The primary color of the application.
-  static Color get primaryColor => Colors.blue;
+  static Color get primaryColor => const Color(
+        0xff323370,
+      );
 
   /// The height for global app bars.
   static double get appBarHeight => 75;
@@ -39,6 +41,11 @@ mixin ApplicationTheme {
       elevation: 0,
       padding: const EdgeInsets.all(
         20,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          borderRadius,
+        ),
       ),
     );
 

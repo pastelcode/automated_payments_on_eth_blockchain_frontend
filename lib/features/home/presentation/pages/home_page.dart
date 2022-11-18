@@ -2,6 +2,7 @@ import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/
 import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
@@ -26,9 +27,27 @@ class HomePage extends StatelessWidget {
     BuildContext context,
   ) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: Text(
-          'Automated Payments on Ethereum Blockchain',
+      appBar: CustomAppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Automated Payments on',
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Tooltip(
+              message: 'Ethereum',
+              child: Assets.illustrations.ethereumEthLogo.svg(
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface,
+                height: ApplicationTheme.appBarHeight - 45,
+                semanticsLabel: 'Ethereum',
+              ),
+            ),
+          ],
         ),
       ),
       body: Center(

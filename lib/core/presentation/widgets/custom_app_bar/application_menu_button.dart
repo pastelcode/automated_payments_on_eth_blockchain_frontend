@@ -14,7 +14,7 @@ class ApplicationMenuButton extends StatelessWidget {
     BuildContext context,
   ) {
     return IconButton(
-      tooltip: 'Preferencias',
+      tooltip: 'Settings',
       icon: const Icon(
         FlutterRemix.settings_5_line,
       ),
@@ -32,7 +32,7 @@ class ApplicationMenuButton extends StatelessWidget {
     await showCustomModalBottomSheet<void>(
       context: context,
       title: const Text(
-        'Preferencias',
+        'Settings',
       ),
       child: const _ApplicationMenuButtonContent(),
     );
