@@ -154,6 +154,12 @@ class _MembersListState extends State<_MembersList> {
                     key: _newMemberFormKey,
                     child: Column(
                       children: <Widget>[
+                        const Divider(
+                          thickness: 1,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         _MemberEntry(
                           addressController: _newMemberAddressController,
                           percentController: _newMemberPercentController,
