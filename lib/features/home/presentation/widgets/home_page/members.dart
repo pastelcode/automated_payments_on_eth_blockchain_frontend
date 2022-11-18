@@ -27,12 +27,12 @@ class _Members extends StatelessWidget {
     return BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
       builder: (
         BuildContext context,
-        ContractSettingsState state,
+        ContractSettingsState contractSettingsState,
       ) {
         return Row(
           children: <Widget>[
-            const Text(
-              'Members',
+            Text(
+              'Members (${contractSettingsState.members.length})',
             ),
             const Spacer(),
             Button(
@@ -42,7 +42,7 @@ class _Members extends StatelessWidget {
                 );
               },
               title: Text(
-                state.members.isEmpty ? 'Set up' : 'View',
+                contractSettingsState.members.isEmpty ? 'Set up' : 'View',
               ),
             )
           ],
