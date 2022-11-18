@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+part '../widgets/home_page/add_members_bottom_sheet.dart';
 part '../widgets/home_page/duration.dart';
 part '../widgets/home_page/lapseds.dart';
+part '../widgets/home_page/member_entry.dart';
 part '../widgets/home_page/members.dart';
 part '../widgets/home_page/members_list.dart';
+part '../widgets/home_page/new_member_form.dart';
+part '../widgets/home_page/no_members_banner.dart';
 part '../widgets/home_page/sign_and_execute_button.dart';
 
 /// {@template home_page}

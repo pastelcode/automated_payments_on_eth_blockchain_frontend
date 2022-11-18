@@ -16,7 +16,7 @@ class _Members extends StatelessWidget {
       title: const Text(
         'Members for contract',
       ),
-      child: const _MembersList(),
+      child: const _AddMembersBottomSheet(),
     );
   }
 
