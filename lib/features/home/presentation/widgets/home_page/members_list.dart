@@ -8,7 +8,7 @@ class _MembersList extends StatefulWidget {
 }
 
 class _MembersListState extends State<_MembersList> {
-  final ValueNotifier<bool> _isNewMemberFormVisible = ValueNotifier<bool>(
+  final _isNewMemberFormVisible = ValueNotifier<bool>(
     false,
   );
   final _newMemberFormKey = GlobalKey<FormState>();
@@ -26,10 +26,6 @@ class _MembersListState extends State<_MembersList> {
     _isNewMemberFormVisible.value = true;
   }
 
-  void _hideNewMemberForm() {
-    _isNewMemberFormVisible.value = false;
-  }
-
   void _saveMember() {
     if (!_newMemberFormKey.currentState!.validate()) {
       return;
@@ -42,9 +38,15 @@ class _MembersListState extends State<_MembersList> {
             ),
           ),
         );
+  }
+
+  void _clearAndHideNewMemberForm() {
     _newMemberAddressController.clear();
     _newMemberPercentController.clear();
-    _hideNewMemberForm();
+    _isNewMemberFormVisible.value = false;
+    context.read<ContractSettingsBloc>().add(
+          const ResetFailure(),
+        );
   }
 
   void _removeMember({
@@ -61,7 +63,20 @@ class _MembersListState extends State<_MembersList> {
   Widget build(
     BuildContext context,
   ) {
-    return BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+    return BlocConsumer<ContractSettingsBloc, ContractSettingsState>(
+      listenWhen: (
+        ContractSettingsState previousContractSettingsState,
+        ContractSettingsState currentContractSettingsState,
+      ) {
+        return currentContractSettingsState.members.length >
+            previousContractSettingsState.members.length;
+      },
+      listener: (
+        BuildContext context,
+        ContractSettingsState state,
+      ) {
+        _clearAndHideNewMemberForm();
+      },
       builder: (
         BuildContext context,
         ContractSettingsState contractSettingsState,
@@ -69,56 +84,68 @@ class _MembersListState extends State<_MembersList> {
         return SliverList(
           delegate: SliverChildListDelegate(
             <Widget>[
-              for (int index = 0;
-                  index < contractSettingsState.members.length;
-                  index++) ...[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(
-                        10,
+              ListView.separated(
+                itemCount: contractSettingsState.members.length,
+                shrinkWrap: true,
+                separatorBuilder: (
+                  _,
+                  __,
+                ) {
+                  return const SizedBox(
+                    height: 15,
+                  );
+                },
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                ) {
+                  final member = contractSettingsState.members[index];
+
+                  return Row(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(
+                          10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(
+                                .1,
+                              ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          '${index + 1}',
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withOpacity(
-                              .1,
-                            ),
-                        shape: BoxShape.circle,
+                      const SizedBox(
+                        width: 15,
                       ),
-                      child: Text(
-                        '${index + 1}',
+                      Expanded(
+                        child: _MemberEntry(
+                          address: member.address,
+                          percent: member.percent,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: _MemberEntry(
-                        address: contractSettingsState.members[index].address,
-                        percent: contractSettingsState.members[index].percent,
+                      const SizedBox(
+                        width: 5,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Button(
-                      onPressed: () {
-                        _removeMember(
-                          member: contractSettingsState.members[index],
-                        );
-                      },
-                      title: const Icon(
-                        FlutterRemix.delete_bin_line,
+                      Button(
+                        onPressed: () {
+                          _removeMember(
+                            member: contractSettingsState.members[index],
+                          );
+                        },
+                        title: const Icon(
+                          FlutterRemix.delete_bin_line,
+                        ),
+                        tooltip: 'Delete member',
                       ),
-                      tooltip: 'Delete member',
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
+                    ],
+                  );
+                },
+              ),
               ValueListenableBuilder(
                 valueListenable: _isNewMemberFormVisible,
                 builder: (
@@ -126,6 +153,7 @@ class _MembersListState extends State<_MembersList> {
                   bool isNewMemberFormVisible,
                   _,
                 ) {
+                  void _hideNewMemberForm() {}
                   if (!isNewMemberFormVisible) {
                     return Column(
                       children: <Widget>[
@@ -192,11 +220,46 @@ class _MembersListState extends State<_MembersList> {
                         const SizedBox(
                           height: 15,
                         ),
+                        if (contractSettingsState.failure != null) ...[
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(
+                                .1,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                ApplicationTheme.borderRadius,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  const Icon(
+                                    FlutterRemix.error_warning_line,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    '${contractSettingsState.failure?.message}',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Button(
-                              onPressed: _hideNewMemberForm,
+                              onPressed: _clearAndHideNewMemberForm,
                               title: const Text(
                                 'Cancel',
                               ),
@@ -239,6 +302,14 @@ class _MembersListState extends State<_MembersList> {
   }
 
   @override
+  void deactivate() {
+    context.read<ContractSettingsBloc>().add(
+          const ResetFailure(),
+        );
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
     _isNewMemberFormVisible.dispose();
     super.dispose();
@@ -272,6 +343,10 @@ class _MemberEntry extends StatelessWidget {
         Expanded(
           flex: 2,
           child: TextFormField(
+            key: Key(
+              address ?? '',
+            ),
+            autofocus: true,
             readOnly: areTextFieldsReadOnly,
             initialValue: address,
             controller: addressController,
@@ -302,6 +377,9 @@ class _MemberEntry extends StatelessWidget {
         ),
         Expanded(
           child: TextFormField(
+            key: Key(
+              percent ?? '',
+            ),
             readOnly: areTextFieldsReadOnly,
             initialValue: percent,
             controller: percentController,
