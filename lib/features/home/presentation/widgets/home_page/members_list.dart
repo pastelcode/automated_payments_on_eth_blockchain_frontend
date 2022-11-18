@@ -153,7 +153,6 @@ class _MembersListState extends State<_MembersList> {
                   bool isNewMemberFormVisible,
                   _,
                 ) {
-                  void _hideNewMemberForm() {}
                   if (!isNewMemberFormVisible) {
                     return Column(
                       children: <Widget>[
