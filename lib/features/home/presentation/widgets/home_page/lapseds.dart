@@ -12,21 +12,31 @@ class _Lapseds extends StatelessWidget {
         BuildContext context,
         ContractSettingsState state,
       ) {
-        return Tooltip(
-          message: state.members.isEmpty ? 'Set members first' : '',
-          child: AbsorbPointer(
-            absorbing: state.members.isEmpty,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
               children: <Widget>[
-                if (state.members.isEmpty)
+                const Text(
+                  'Lapseds',
+                ),
+                if (state.members.isEmpty) ...[
+                  const SizedBox(
+                    width: 15,
+                  ),
                   Chip(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(
-                          ApplicationTheme.borderRadius,
-                        ),
+                      borderRadius: BorderRadius.circular(
+                        ApplicationTheme.borderRadius,
                       ),
+                    ),
+                    avatar: Icon(
+                      FlutterRemix.error_warning_line,
+                      size: Theme.of(
+                            context,
+                          ).textTheme.caption!.fontSize! *
+                          1.5,
+                      color: Colors.orange.shade900,
                     ),
                     label: const Text(
                       'Set members first',
@@ -34,36 +44,22 @@ class _Lapseds extends StatelessWidget {
                     labelStyle: Theme.of(
                       context,
                     ).textTheme.caption!.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onPrimary,
+                          color: Colors.orange.shade900,
                         ),
-                    backgroundColor: Theme.of(
-                      context,
-                    ).colorScheme.primary,
+                    backgroundColor: Colors.orange.shade50,
                   ),
-                Opacity(
-                  opacity: state.members.isEmpty ? .5 : 1,
-                  child: Row(
-                    children: <Widget>[
-                      const Text(
-                        'Lapseds',
-                      ),
-                      const Spacer(),
-                      Button(
-                        onPressed: () {},
-                        title: Text(
-                          state.lapseds.isEmpty ? 'Set up' : 'View',
-                        ),
-                        tooltip:
-                            state.members.isEmpty ? 'Set members first' : '',
-                      ),
-                    ],
+                ],
+                const Spacer(),
+                Button(
+                  onPressed: state.members.isEmpty ? null : () {},
+                  title: Text(
+                    state.lapseds.isEmpty ? 'Set up' : 'View',
                   ),
+                  tooltip: state.members.isEmpty ? 'Set members first' : '',
                 ),
               ],
             ),
-          ),
+          ],
         );
       },
     );
