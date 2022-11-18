@@ -15,6 +15,18 @@ class ContractSettingsState extends Equatable {
   final List<Lapsed> lapseds;
   final Duration? duration;
 
+  ContractSettingsState copyWith({
+    List<Member>? members,
+    List<Lapsed>? lapseds,
+    Duration? duration,
+  }) {
+    return ContractSettingsState(
+      members: members ?? this.members,
+      lapseds: lapseds ?? this.lapseds,
+      duration: duration ?? this.duration,
+    );
+  }
+
   @override
   List<Object?> get props => [
         members,

@@ -9,7 +9,7 @@ part 'contract_settings_state.dart';
 /// A bloc to manage the main contract settings.
 ///
 /// Events:
-/// - [UpdateMembers]
+/// - [AddMember]
 /// - [UpdateLapseds]
 /// - [UpdateDuration]
 ///
@@ -27,15 +27,24 @@ class ContractSettingsBloc
             duration: null,
           ),
         ) {
-    on<UpdateMembers>(
-      _handleUpdateMembers,
+    on<AddMember>(
+      _handleAddMember,
     );
   }
 
-  void _handleUpdateMembers(
-    UpdateMembers event,
+  void _handleAddMember(
+    AddMember event,
     Emitter<ContractSettingsState> emit,
-  ) {}
+  ) {
+    emit(
+      state.copyWith(
+        members: <Member>[
+          ...state.members,
+          event.member,
+        ],
+      ),
+    );
+  }
 
   // TODO(pastelcode): Add a handler for [UpdateLapseds]
 

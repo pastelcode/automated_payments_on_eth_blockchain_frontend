@@ -4,10 +4,12 @@ import 'package:automated_payments_on_eth_blockchain_frontend/features/home/doma
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
 part '../widgets/home_page/duration.dart';
 part '../widgets/home_page/lapseds.dart';
 part '../widgets/home_page/members.dart';
+part '../widgets/home_page/members_list.dart';
 part '../widgets/home_page/sign_and_execute_button.dart';
 
 /// {@template home_page}

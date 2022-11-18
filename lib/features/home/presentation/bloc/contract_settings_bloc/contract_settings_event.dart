@@ -11,21 +11,21 @@ abstract class ContractSettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-/// {@template update_members}
+/// {@template add_member}
 /// An event to update the members of the main contract.
 /// {@endtemplate}
-class UpdateMembers extends ContractSettingsEvent {
-  /// {@macro update_members}
-  const UpdateMembers({
-    required this.members,
+class AddMember extends ContractSettingsEvent {
+  /// {@macro add_member}
+  const AddMember({
+    required this.member,
   });
 
-  /// The list of members for the contract.
-  final List<Member> members;
+  /// The member to add to the list of members of the main contract.
+  final Member member;
 
   @override
   List<Object> get props => [
-        members,
+        member,
       ];
 }
 
