@@ -47,6 +47,16 @@ class _MembersListState extends State<_MembersList> {
     _hideNewMemberForm();
   }
 
+  void _removeMember({
+    required Member member,
+  }) {
+    context.read<ContractSettingsBloc>().add(
+          RemoveMember(
+            member: member,
+          ),
+        );
+  }
+
   @override
   Widget build(
     BuildContext context,
@@ -88,6 +98,20 @@ class _MembersListState extends State<_MembersList> {
                         address: contractSettingsState.members[index].address,
                         percent: contractSettingsState.members[index].percent,
                       ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Button(
+                      onPressed: () {
+                        _removeMember(
+                          member: contractSettingsState.members[index],
+                        );
+                      },
+                      title: const Icon(
+                        FlutterRemix.delete_bin_line,
+                      ),
+                      tooltip: 'Delete member',
                     ),
                   ],
                 ),
@@ -289,6 +313,7 @@ class _MemberEntry extends StatelessWidget {
             ) {
               onSubmitted?.call();
             },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (
               String? value,
             ) {

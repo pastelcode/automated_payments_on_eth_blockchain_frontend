@@ -30,6 +30,9 @@ class ContractSettingsBloc
     on<AddMember>(
       _handleAddMember,
     );
+    on<RemoveMember>(
+      _handleRemoveMember,
+    );
   }
 
   void _handleAddMember(
@@ -42,6 +45,24 @@ class ContractSettingsBloc
           ...state.members,
           event.member,
         ],
+      ),
+    );
+  }
+
+  void _handleRemoveMember(
+    RemoveMember event,
+    Emitter<ContractSettingsState> emit,
+  ) {
+    final filteredList = state.members.where(
+      (
+        Member member,
+      ) {
+        return member.address != event.member.address;
+      },
+    ).toList();
+    emit(
+      state.copyWith(
+        members: filteredList,
       ),
     );
   }

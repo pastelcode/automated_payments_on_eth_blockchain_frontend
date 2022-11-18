@@ -12,7 +12,7 @@ abstract class ContractSettingsEvent extends Equatable {
 }
 
 /// {@template add_member}
-/// An event to update the members of the main contract.
+/// An event to add a new member for the main contract.
 /// {@endtemplate}
 class AddMember extends ContractSettingsEvent {
   /// {@macro add_member}
@@ -21,6 +21,24 @@ class AddMember extends ContractSettingsEvent {
   });
 
   /// The member to add to the list of members of the main contract.
+  final Member member;
+
+  @override
+  List<Object> get props => [
+        member,
+      ];
+}
+
+/// {@template remove_member}
+/// An event to delete a member from the list of members for the main contract.
+/// {@endtemplate}
+class RemoveMember extends ContractSettingsEvent {
+  /// {@macro remove_member}
+  const RemoveMember({
+    required this.member,
+  });
+
+  /// The member to be deleted.
   final Member member;
 
   @override
