@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 /// {@template member}
 /// A member for the contract.
 /// {@endtemplate}
-class Member {
+class Member extends Equatable {
   ///
   const Member({
     required this.address,
@@ -13,4 +15,10 @@ class Member {
 
   /// The percent this member is going to pay over the contract.
   final String percent;
+
+  @override
+  List<Object?> get props => [
+        address,
+        percent,
+      ];
 }

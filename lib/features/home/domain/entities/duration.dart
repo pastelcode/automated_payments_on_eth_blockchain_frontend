@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 /// {@template duration}
 /// The duration for the main contract.
 /// {@endtemplate}
-class Duration {
+class Duration extends Equatable {
   /// {@macro duration}
   const Duration({
     required this.end,
@@ -15,6 +17,12 @@ class Duration {
 
   /// The unit of the time for [end].
   final DurationUnit unit;
+
+  @override
+  List<Object?> get props => [
+        end,
+        unit,
+      ];
 }
 
 /// {@template duration_unit}
