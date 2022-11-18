@@ -7,52 +7,61 @@ class _Lapseds extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return AbsorbPointer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Chip(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(
-                  ApplicationTheme.borderRadius,
+    return BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+      builder: (
+        BuildContext context,
+        ContractSettingsState state,
+      ) {
+        return AbsorbPointer(
+          absorbing: state.members.isEmpty,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              if (state.members.isEmpty)
+                Chip(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(
+                        ApplicationTheme.borderRadius,
+                      ),
+                    ),
+                  ),
+                  label: const Text(
+                    'Set members first',
+                  ),
+                  labelStyle: Theme.of(
+                    context,
+                  ).textTheme.caption!.copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary,
+                      ),
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.primary,
+                ),
+              Opacity(
+                opacity: state.members.isEmpty ? .5 : 1,
+                child: Row(
+                  children: <Widget>[
+                    const Text(
+                      'Lapseds',
+                    ),
+                    const Spacer(),
+                    Button(
+                      onPressed: () {},
+                      isPrimary: true,
+                      title: Text(
+                        state.lapseds.isEmpty ? 'Set up' : 'View',
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            label: const Text(
-              'Set members first',
-            ),
-            labelStyle: Theme.of(
-              context,
-            ).textTheme.caption!.copyWith(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onPrimary,
-                ),
-            backgroundColor: Theme.of(
-              context,
-            ).colorScheme.primary,
+            ],
           ),
-          Opacity(
-            opacity: .5,
-            child: Row(
-              children: <Widget>[
-                const Text(
-                  'Lapseds',
-                ),
-                const Spacer(),
-                Button(
-                  onPressed: () {},
-                  isPrimary: true,
-                  title: const Text(
-                    'Set up',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

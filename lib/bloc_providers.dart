@@ -27,6 +27,13 @@ class _BlocProviders extends StatelessWidget {
             return SignAndExecuteContractBloc();
           },
         ),
+        BlocProvider(
+          create: (
+            _,
+          ) {
+            return ContractSettingsBloc();
+          },
+        ),
       ],
       child: child,
     );

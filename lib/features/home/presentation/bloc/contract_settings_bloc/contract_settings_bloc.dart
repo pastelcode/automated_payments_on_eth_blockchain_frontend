@@ -36,4 +36,8 @@ class ContractSettingsBloc
     UpdateMembers event,
     Emitter<ContractSettingsState> emit,
   ) {}
+
+  // TODO(pastelcode): Add a handler for [UpdateLapseds]
+
+  // TODO(pastelcode): Add a handler for [UpdateDuration]
 }
