@@ -17,8 +17,9 @@ class _Lapseds extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                const Text(
-                  'Lapseds',
+                Text(
+                  '''
+Lapseds${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
                 ),
                 if (state.members.isEmpty) ...[
                   const SizedBox(
@@ -36,17 +37,16 @@ class _Lapseds extends StatelessWidget {
                             context,
                           ).textTheme.caption!.fontSize! *
                           1.5,
-                      color: Colors.orange.shade900,
                     ),
                     label: const Text(
                       'Set members first',
                     ),
                     labelStyle: Theme.of(
                       context,
-                    ).textTheme.caption!.copyWith(
-                          color: Colors.orange.shade900,
-                        ),
-                    backgroundColor: Colors.orange.shade50,
+                    ).textTheme.caption,
+                    backgroundColor: Colors.blue.withOpacity(
+                      .1,
+                    ),
                   ),
                 ],
                 const Spacer(),

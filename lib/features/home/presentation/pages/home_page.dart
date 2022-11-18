@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
         title: Row(
           children: <Widget>[
             const Text(
-              'Automated Payments on',
+              'Automated Payments',
             ),
             const SizedBox(
               width: 15,
