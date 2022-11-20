@@ -3,14 +3,20 @@ import 'package:automated_payments_on_eth_blockchain_frontend/features/home/pres
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Duration extends StatefulWidget {
-  const Duration();
+/// {@template duration_form_content}
+/// A form content to set the duration of the main contract.
+/// {@endtemplate}
+class DurationFormContent extends StatefulWidget {
+  /// {@macro duration_form_content}
+  const DurationFormContent({
+    super.key,
+  });
 
   @override
-  State<Duration> createState() => _DurationState();
+  State<DurationFormContent> createState() => _DurationFormContentState();
 }
 
-class _DurationState extends State<Duration> {
+class _DurationFormContentState extends State<DurationFormContent> {
   late TextEditingController _endController;
   final _unit = ValueNotifier<DurationUnit?>(null);
 
@@ -67,7 +73,7 @@ class _DurationState extends State<Duration> {
                                 value,
                               ) ==
                               null) {
-                        return 'Enter a valid number';
+                        return 'Set an end for the contract';
                       }
                       return null;
                     },

@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class Lapseds extends StatelessWidget {
-  const Lapseds();
+/// {@template lapses_tile}
+/// A tile to set/view the lapses of the main contract.
+/// {@endtemplate}
+class LapsesTile extends StatelessWidget {
+  /// {@macro lapses_tile}
+  const LapsesTile({
+    super.key,
+  });
 
   @override
   Widget build(
