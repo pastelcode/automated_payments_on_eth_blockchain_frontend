@@ -1,7 +1,17 @@
-part of '../../pages/home_page.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/add_members_bottom_sheet.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _Members extends StatelessWidget {
-  const _Members();
+/// {@template members_tile}
+/// A tile to set/view members for the contract.
+/// {@endtemplate}
+class MembersTile extends StatelessWidget {
+  /// {@macro members_tile}
+  const MembersTile({
+    super.key,
+  });
 
   Future<void> _showMembersList({
     required BuildContext context,
@@ -16,7 +26,7 @@ class _Members extends StatelessWidget {
       title: const Text(
         'Members for contract',
       ),
-      child: const _AddMembersBottomSheet(),
+      child: const MembersBottomSheet(),
     );
   }
 

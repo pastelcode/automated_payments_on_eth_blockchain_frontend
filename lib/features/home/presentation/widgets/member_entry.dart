@@ -1,18 +1,51 @@
-part of '../../pages/home_page.dart';
+import 'package:flutter/material.dart';
 
-class _MemberEntry extends StatelessWidget {
-  const _MemberEntry({
+/// {@template member_entry}
+/// A row that shows the address of a member and the percent they are going to
+/// pay on the contract.
+///
+/// If [address] and [percent] are null the text fields are editable, so a user
+/// can be added using those text fields.
+/// {@endtemplate}
+class MemberEntry extends StatelessWidget {
+  /// {@macro member_entry}
+  const MemberEntry({
+    super.key,
     this.address,
     this.percent,
     this.addressController,
     this.percentController,
     this.onSubmitted,
-  });
+  }) : assert(
+          (address == null &&
+                  percent == null &&
+                  addressController != null &&
+                  percentController != null &&
+                  onSubmitted != null) ||
+              (address != null &&
+                  percent != null &&
+                  addressController == null &&
+                  percentController == null &&
+                  onSubmitted == null),
+          '''
+If entry is for read-only purposes, the address and percent must not be null while remaining fields must.''',
+        );
 
+  /// The address to show by default.
   final String? address;
+
+  /// The percent to show by default.
   final String? percent;
+
+  /// The [TextEditingController] to get the address that is currently being
+  /// typed if a member is being added.
   final TextEditingController? addressController;
+
+  /// The [TextEditingController] to get the percent that is currently being
+  /// typed if a member is being added.
   final TextEditingController? percentController;
+
+  /// The function to execute the text fields are submitted.
   final void Function()? onSubmitted;
 
   @override

@@ -1,7 +1,15 @@
-part of '../../pages/home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
-class _NoMembersBanner extends StatelessWidget {
-  const _NoMembersBanner();
+/// {@template no_members_banner}
+/// A banner to show when there are no members for the contract previously
+/// added.
+/// {@endtemplate}
+class NoMembersBanner extends StatelessWidget {
+  /// {@macro no_members_banner}
+  const NoMembersBanner({
+    super.key,
+  });
 
   @override
   Widget build(

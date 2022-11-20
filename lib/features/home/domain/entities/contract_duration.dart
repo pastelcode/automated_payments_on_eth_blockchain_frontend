@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 /// {@template duration}
 /// The duration for the main contract.
 /// {@endtemplate}
-class Duration extends Equatable {
+class ContractDuration extends Equatable {
   /// {@macro duration}
-  const Duration({
+  const ContractDuration({
     required this.end,
     required this.unit,
   });

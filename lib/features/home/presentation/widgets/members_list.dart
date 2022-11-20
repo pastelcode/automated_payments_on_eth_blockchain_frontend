@@ -1,11 +1,24 @@
-part of '../../pages/home_page.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/member_entry.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
-class _MembersList extends StatelessWidget {
-  const _MembersList();
+/// {@template members_list}
+/// A list view to show all members with their addresses and percents they are
+/// going to pay on the contract.
+/// {@endtemplate}
+class MembersList extends StatelessWidget {
+  /// {@macro members_list}
+  const MembersList({
+    super.key,
+  });
 
   void _removeMember({
     required BuildContext context,
-    required Member member,
+    required ContractMember member,
   }) {
     context.read<ContractSettingsBloc>().add(
           RemoveMember(
@@ -62,7 +75,7 @@ class _MembersList extends StatelessWidget {
                   width: 15,
                 ),
                 Expanded(
-                  child: _MemberEntry(
+                  child: MemberEntry(
                     address: member.address,
                     percent: member.percent,
                   ),

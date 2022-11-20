@@ -7,12 +7,10 @@ mixin ApplicationTheme {
   static double get borderRadius => 10;
 
   /// The primary color of the application.
-  static Color get primaryColor => const Color(
-        0xff323370,
-      );
+  static Color get primaryColor => Colors.blueAccent;
 
   /// The height for global app bars.
-  static double get appBarHeight => 75;
+  static double get appBarHeight => 85;
 
   static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
         border: OutlineInputBorder(
@@ -58,9 +56,7 @@ mixin ApplicationTheme {
       appBarTheme: AppBarTheme(
         centerTitle: false,
         toolbarHeight: appBarHeight,
-        backgroundColor: colorScheme.surfaceVariant.withOpacity(
-          .5,
-        ),
+        backgroundColor: colorScheme.surface,
       ),
       canvasColor: colorScheme.surfaceVariant,
       scaffoldBackgroundColor: colorScheme.surface,

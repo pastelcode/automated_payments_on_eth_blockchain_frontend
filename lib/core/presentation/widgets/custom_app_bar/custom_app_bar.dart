@@ -42,7 +42,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       title: DefaultTextStyle.merge(
         style: const TextStyle(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w700,
+          fontSize: 24,
         ),
         child: Row(
           children: <Widget>[
