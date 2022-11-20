@@ -51,13 +51,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 20,
             ),
             title,
+            const Spacer(),
+            ...?actions,
+            const ApplicationMenuButton(),
           ],
         ),
       ),
-      actions: <Widget>[
-        ...?actions,
-        const ApplicationMenuButton(),
-      ],
     );
   }
 

@@ -13,9 +13,9 @@ class ApplicationMenuButton extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return IconButton(
+    return Button(
       tooltip: 'Settings',
-      icon: const Icon(
+      title: const Icon(
         FlutterRemix.settings_5_line,
       ),
       onPressed: () {
