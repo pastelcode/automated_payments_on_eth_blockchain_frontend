@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   .9,
           child: ListView(
             padding: const EdgeInsets.only(
-              top: 20,
+              top: 30,
             ),
             children: <Widget>[
               Text(
@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage> {
                   context,
                 ).textTheme.headline5,
               ),
-              const _Gap(),
               const _Gap(),
               const Members(),
               const _Gap(),
