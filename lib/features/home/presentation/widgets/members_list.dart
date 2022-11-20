@@ -6,12 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+/// {@template members_list}
+/// A list view to show all members with their addresses and percents they are
+/// going to pay on the contract.
+/// {@endtemplate}
 class MembersList extends StatelessWidget {
-  const MembersList();
+  /// {@macro members_list}
+  const MembersList({
+    super.key,
+  });
 
   void _removeMember({
     required BuildContext context,
-    required Member member,
+    required ContractMember member,
   }) {
     context.read<ContractSettingsBloc>().add(
           RemoveMember(

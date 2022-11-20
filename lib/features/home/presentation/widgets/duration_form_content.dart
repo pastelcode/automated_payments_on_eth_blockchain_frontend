@@ -3,14 +3,20 @@ import 'package:automated_payments_on_eth_blockchain_frontend/features/home/pres
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Duration extends StatefulWidget {
-  const Duration();
+/// {@template duration_form_content}
+/// A form content to set the duration of the main contract.
+/// {@endtemplate}
+class DurationFormContent extends StatefulWidget {
+  /// {@macro duration_form_content}
+  const DurationFormContent({
+    super.key,
+  });
 
   @override
-  State<Duration> createState() => _DurationState();
+  State<DurationFormContent> createState() => _DurationFormContentState();
 }
 
-class _DurationState extends State<Duration> {
+class _DurationFormContentState extends State<DurationFormContent> {
   late TextEditingController _endController;
   final _unit = ValueNotifier<DurationUnit?>(null);
 
@@ -22,7 +28,16 @@ class _DurationState extends State<Duration> {
 
   void _updateDuration({
     required BuildContext context,
-  }) {}
+  }) {
+    context.read<ContractSettingsBloc>().add(
+          UpdateDuration(
+            duration: ContractDuration(
+              end: _endController.text,
+              unit: _unit.value,
+            ),
+          ),
+        );
+  }
 
   @override
   Widget build(
@@ -51,7 +66,6 @@ class _DurationState extends State<Duration> {
                     controller: _endController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
-                    initialValue: state.duration?.end,
                     decoration: const InputDecoration(
                       label: Text(
                         'Duration',
@@ -67,11 +81,17 @@ class _DurationState extends State<Duration> {
                                 value,
                               ) ==
                               null) {
-                        return 'Enter a valid number';
+                        return 'Set an end for the contract';
                       }
                       return null;
                     },
-                    onChanged: print,
+                    onChanged: (
+                      String value,
+                    ) {
+                      _updateDuration(
+                        context: context,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -84,6 +104,7 @@ class _DurationState extends State<Duration> {
                     onChanged: (
                       DurationUnit? unit,
                     ) {
+                      _unit.value = unit;
                       _updateDuration(
                         context: context,
                       );
@@ -91,6 +112,7 @@ class _DurationState extends State<Duration> {
                     hint: const Text(
                       'Unit',
                     ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (
                       DurationUnit? value,
                     ) {

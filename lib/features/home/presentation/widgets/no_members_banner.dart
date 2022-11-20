@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+/// {@template no_members_banner}
+/// A banner to show when there are no members for the contract previously
+/// added.
+/// {@endtemplate}
 class NoMembersBanner extends StatelessWidget {
-  const NoMembersBanner();
+  /// {@macro no_members_banner}
+  const NoMembersBanner({
+    super.key,
+  });
 
   @override
   Widget build(

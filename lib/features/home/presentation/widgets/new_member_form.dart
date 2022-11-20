@@ -7,11 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+/// {@template new_member_form}
+/// A form to add a new member for the contract.
+/// {@endtemplate}
 class NewMemberForm extends StatefulWidget {
+  /// {@macro new_member_form}
   const NewMemberForm({
+    super.key,
     this.onCancel,
   });
 
+  /// The function to execute when adding a new member is canceled.
   final void Function()? onCancel;
 
   @override
@@ -36,7 +42,7 @@ class _NewMemberFormState extends State<NewMemberForm> {
     }
     context.read<ContractSettingsBloc>().add(
           AddMember(
-            member: Member(
+            member: ContractMember(
               address: _newMemberAddressController.text,
               percent: _newMemberPercentController.text,
             ),

@@ -5,14 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
-class AddMembersBottomSheet extends StatefulWidget {
-  const AddMembersBottomSheet();
+/// {@template members_bottom_sheet}
+/// The content of a bottom sheet that shows the list of members of the main
+/// contract and a option to add one more.
+/// {@endtemplate}
+class MembersBottomSheet extends StatefulWidget {
+  /// {@macro members_bottom_sheet}
+  const MembersBottomSheet({
+    super.key,
+  });
 
   @override
-  State<AddMembersBottomSheet> createState() => _AddMembersBottomSheetState();
+  State<MembersBottomSheet> createState() => _MembersBottomSheetState();
 }
 
-class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
+class _MembersBottomSheetState extends State<MembersBottomSheet> {
   final _isNewMemberFormVisible = ValueNotifier<bool>(
     false,
   );
