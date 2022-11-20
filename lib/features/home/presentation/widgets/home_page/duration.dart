@@ -1,7 +1,25 @@
 part of '../../pages/home_page.dart';
 
-class _Duration extends StatelessWidget {
+class _Duration extends StatefulWidget {
   const _Duration();
+
+  @override
+  State<_Duration> createState() => _DurationState();
+}
+
+class _DurationState extends State<_Duration> {
+  late TextEditingController _endController;
+  final _unit = ValueNotifier<DurationUnit?>(null);
+
+  @override
+  void initState() {
+    super.initState();
+    _endController = TextEditingController();
+  }
+
+  void _updateDuration({
+    required BuildContext context,
+  }) {}
 
   @override
   Widget build(
@@ -25,6 +43,7 @@ class _Duration extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: TextFormField(
+                    controller: _endController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     initialValue: state.duration?.end,
@@ -43,10 +62,11 @@ class _Duration extends StatelessWidget {
                                 value,
                               ) ==
                               null) {
-                        return 'Must be a valid number';
+                        return 'Enter a valid number';
                       }
                       return null;
                     },
+                    onChanged: print,
                   ),
                 ),
                 const SizedBox(
@@ -56,9 +76,24 @@ class _Duration extends StatelessWidget {
                   child: DropdownButtonFormField<DurationUnit>(
                     elevation: 0,
                     value: state.duration?.unit,
+                    onChanged: (
+                      DurationUnit? unit,
+                    ) {
+                      _updateDuration(
+                        context: context,
+                      );
+                    },
                     hint: const Text(
                       'Unit',
                     ),
+                    validator: (
+                      DurationUnit? value,
+                    ) {
+                      if (value == null) {
+                        return 'Select a time unit';
+                      }
+                      return null;
+                    },
                     items: List<DropdownMenuItem<DurationUnit>>.generate(
                       DurationUnit.values.length,
                       (
@@ -72,7 +107,6 @@ class _Duration extends StatelessWidget {
                         );
                       },
                     ),
-                    onChanged: print,
                   ),
                 ),
               ],
@@ -81,5 +115,11 @@ class _Duration extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _endController.dispose();
+    super.dispose();
   }
 }

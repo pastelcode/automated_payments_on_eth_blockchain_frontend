@@ -37,6 +37,9 @@ class ContractSettingsBloc
     on<ResetFailure>(
       _handleResetFailure,
     );
+    on<UpdateDuration>(
+      _handleUpdateDuration,
+    );
   }
 
   void _handleAddMember(
@@ -96,6 +99,17 @@ class ContractSettingsBloc
     // Sets the `failure` property to `null`.
     emit(
       state.copyWith(),
+    );
+  }
+
+  void _handleUpdateDuration(
+    UpdateDuration event,
+    Emitter<ContractSettingsState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        duration: event.duration,
+      ),
     );
   }
 

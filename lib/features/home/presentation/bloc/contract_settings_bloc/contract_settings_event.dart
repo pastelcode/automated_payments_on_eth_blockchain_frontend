@@ -55,24 +55,6 @@ class RemoveMember extends ContractSettingsEvent {
       ];
 }
 
-/// {@template update_lapseds}
-/// An event to update the lapseds of the main contract.
-/// {@endtemplate}
-class UpdateLapseds extends ContractSettingsEvent {
-  /// {@macro update_lapseds}
-  const UpdateLapseds({
-    required this.lapseds,
-  });
-
-  /// The list of lapseds for the contract.
-  final List<Lapsed> lapseds;
-
-  @override
-  List<Object> get props => [
-        lapseds,
-      ];
-}
-
 /// {@template update_duration}
 /// An event to update the duration of the main contract.
 /// {@endtemplate}

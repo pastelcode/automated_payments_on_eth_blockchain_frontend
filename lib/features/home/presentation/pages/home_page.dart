@@ -20,11 +20,18 @@ part '../widgets/home_page/sign_and_execute_button.dart';
 /// {@template home_page}
 /// A initial page to show as the home.
 /// {@endtemplate}
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   /// {@macro home_page}
   const HomePage({
     super.key,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _formKeyToValidate = GlobalKey<FormState>();
 
   @override
   Widget build(
@@ -82,10 +89,15 @@ class HomePage extends StatelessWidget {
               const _Gap(),
               const _Lapseds(),
               const _Gap(),
-              const _Duration(),
+              Form(
+                key: _formKeyToValidate,
+                child: const _Duration(),
+              ),
               const _Gap(),
               const _Gap(),
-              const _SignAndExecuteButton(),
+              _SignAndExecuteButton(
+                formKeyToValidate: _formKeyToValidate,
+              ),
             ],
           ),
         ),
