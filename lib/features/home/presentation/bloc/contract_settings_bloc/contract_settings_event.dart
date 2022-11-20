@@ -65,7 +65,7 @@ class UpdateDuration extends ContractSettingsEvent {
   });
 
   /// The duration for the contract.
-  final Duration duration;
+  final ContractDuration duration;
 
   @override
   List<Object> get props => [
