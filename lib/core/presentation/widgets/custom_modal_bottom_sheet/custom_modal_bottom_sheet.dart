@@ -77,9 +77,6 @@ class _CustomBottomSheet extends StatelessWidget {
       slivers: <Widget>[
         SliverAppBar(
           toolbarHeight: ApplicationTheme.appBarHeight,
-          backgroundColor: Theme.of(
-            context,
-          ).colorScheme.surface,
           pinned: true,
           title: title != null
               ? Row(
