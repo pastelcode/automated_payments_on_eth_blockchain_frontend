@@ -28,7 +28,16 @@ class _DurationFormContentState extends State<DurationFormContent> {
 
   void _updateDuration({
     required BuildContext context,
-  }) {}
+  }) {
+    context.read<ContractSettingsBloc>().add(
+          UpdateDuration(
+            duration: ContractDuration(
+              end: _endController.text,
+              unit: _unit.value,
+            ),
+          ),
+        );
+  }
 
   @override
   Widget build(
@@ -57,7 +66,6 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     controller: _endController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
-                    initialValue: state.duration?.end,
                     decoration: const InputDecoration(
                       label: Text(
                         'Duration',
@@ -77,7 +85,13 @@ class _DurationFormContentState extends State<DurationFormContent> {
                       }
                       return null;
                     },
-                    onChanged: print,
+                    onChanged: (
+                      String value,
+                    ) {
+                      _updateDuration(
+                        context: context,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -90,6 +104,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     onChanged: (
                       DurationUnit? unit,
                     ) {
+                      _unit.value = unit;
                       _updateDuration(
                         context: context,
                       );
@@ -97,6 +112,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     hint: const Text(
                       'Unit',
                     ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (
                       DurationUnit? value,
                     ) {

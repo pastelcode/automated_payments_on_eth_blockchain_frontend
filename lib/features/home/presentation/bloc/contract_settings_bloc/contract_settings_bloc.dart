@@ -113,7 +113,5 @@ class ContractSettingsBloc
     );
   }
 
-  // TODO(pastelcode): Add a handler for [UpdateLapseds]
-
-  // TODO(pastelcode): Add a handler for [UpdateDuration]
+  // TODO(pastelcode): Add a handler for [UpdateLapses]
 }
