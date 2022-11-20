@@ -1,7 +1,7 @@
-part of '../../pages/home_page.dart';
+import 'package:flutter/material.dart';
 
-class _MemberEntry extends StatelessWidget {
-  const _MemberEntry({
+class MemberEntry extends StatelessWidget {
+  const MemberEntry({
     this.address,
     this.percent,
     this.addressController,

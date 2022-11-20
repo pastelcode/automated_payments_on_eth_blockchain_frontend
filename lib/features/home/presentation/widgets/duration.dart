@@ -1,13 +1,16 @@
-part of '../../pages/home_page.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _Duration extends StatefulWidget {
-  const _Duration();
+class Duration extends StatefulWidget {
+  const Duration();
 
   @override
-  State<_Duration> createState() => _DurationState();
+  State<Duration> createState() => _DurationState();
 }
 
-class _DurationState extends State<_Duration> {
+class _DurationState extends State<Duration> {
   late TextEditingController _endController;
   final _unit = ValueNotifier<DurationUnit?>(null);
 
@@ -36,7 +39,9 @@ class _DurationState extends State<_Duration> {
             const Text(
               'Duration',
             ),
-            const _Gap(),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

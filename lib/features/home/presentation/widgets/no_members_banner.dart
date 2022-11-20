@@ -1,7 +1,8 @@
-part of '../../pages/home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
-class _NoMembersBanner extends StatelessWidget {
-  const _NoMembersBanner();
+class NoMembersBanner extends StatelessWidget {
+  const NoMembersBanner();
 
   @override
   Widget build(
