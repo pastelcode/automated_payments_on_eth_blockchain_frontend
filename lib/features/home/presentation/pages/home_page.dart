@@ -80,11 +80,12 @@ class _HomePageState extends State<HomePage> {
                 child: const DurationFormContent(),
               ),
               const _Gap(),
-              const Divider(),
               const _Gap(),
               SignAndExecuteButton(
                 formKeyToValidate: _formKeyToValidate,
               ),
+              const _Gap(),
+              const Divider(),
             ],
           ),
         ),
