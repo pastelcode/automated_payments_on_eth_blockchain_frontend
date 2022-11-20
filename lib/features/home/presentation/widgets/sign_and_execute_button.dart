@@ -1,7 +1,8 @@
-part of '../../pages/home_page.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 
-class _SignAndExecuteButton extends StatelessWidget {
-  const _SignAndExecuteButton({
+class SignAndExecuteButton extends StatelessWidget {
+  const SignAndExecuteButton({
     required this.formKeyToValidate,
   });
 

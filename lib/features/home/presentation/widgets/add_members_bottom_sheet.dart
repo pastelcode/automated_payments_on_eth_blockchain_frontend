@@ -1,13 +1,18 @@
-part of '../../pages/home_page.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 
-class _AddMembersBottomSheet extends StatefulWidget {
-  const _AddMembersBottomSheet();
+class AddMembersBottomSheet extends StatefulWidget {
+  const AddMembersBottomSheet();
 
   @override
-  State<_AddMembersBottomSheet> createState() => _AddMembersBottomSheetState();
+  State<AddMembersBottomSheet> createState() => _AddMembersBottomSheetState();
 }
 
-class _AddMembersBottomSheetState extends State<_AddMembersBottomSheet> {
+class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
   final _isNewMemberFormVisible = ValueNotifier<bool>(
     false,
   );
@@ -32,7 +37,7 @@ class _AddMembersBottomSheetState extends State<_AddMembersBottomSheet> {
         return SliverList(
           delegate: SliverChildListDelegate(
             <Widget>[
-              const _MembersList(),
+              const MembersList(),
               ValueListenableBuilder(
                 valueListenable: _isNewMemberFormVisible,
                 builder: (
@@ -44,7 +49,7 @@ class _AddMembersBottomSheetState extends State<_AddMembersBottomSheet> {
                     return Column(
                       children: <Widget>[
                         if (contractSettingsState.members.isEmpty)
-                          const _NoMembersBanner(),
+                          const NoMembersBanner(),
                         const SizedBox(
                           height: 10,
                         ),
@@ -73,7 +78,7 @@ class _AddMembersBottomSheetState extends State<_AddMembersBottomSheet> {
                           height: 16,
                         ),
                       ],
-                      _NewMemberForm(
+                      NewMemberForm(
                         onCancel: _hideNewMemberForm,
                       ),
                     ],
