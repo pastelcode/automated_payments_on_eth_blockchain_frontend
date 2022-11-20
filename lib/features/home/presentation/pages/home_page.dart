@@ -1,21 +1,8 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-
-part '../widgets/home_page/add_members_bottom_sheet.dart';
-part '../widgets/home_page/duration.dart';
-part '../widgets/home_page/lapseds.dart';
-part '../widgets/home_page/member_entry.dart';
-part '../widgets/home_page/members.dart';
-part '../widgets/home_page/members_list.dart';
-part '../widgets/home_page/new_member_form.dart';
-part '../widgets/home_page/no_members_banner.dart';
-part '../widgets/home_page/sign_and_execute_button.dart';
 
 /// {@template home_page}
 /// A initial page to show as the home.
@@ -85,17 +72,17 @@ class _HomePageState extends State<HomePage> {
               ),
               const _Gap(),
               const _Gap(),
-              const _Members(),
+              const Members(),
               const _Gap(),
-              const _Lapseds(),
+              const Lapseds(),
               const _Gap(),
               Form(
                 key: _formKeyToValidate,
-                child: const _Duration(),
+                child: const Duration(),
               ),
               const _Gap(),
               const _Gap(),
-              _SignAndExecuteButton(
+              SignAndExecuteButton(
                 formKeyToValidate: _formKeyToValidate,
               ),
             ],
