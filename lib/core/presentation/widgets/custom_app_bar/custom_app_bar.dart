@@ -47,8 +47,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: Row(
           children: <Widget>[
-            const SizedBox(
-              width: 20,
+            SizedBox(
+              width: MediaQuery.of(
+                        context,
+                      ).size.width <=
+                      500
+                  ? 0
+                  : 20,
             ),
             title,
             const Spacer(),

@@ -18,10 +18,20 @@ class MembersTile extends StatelessWidget {
   }) async {
     await showCustomModalBottomSheet<void>(
       context: context,
-      padding: const EdgeInsets.only(
+      padding: EdgeInsets.only(
         top: 15,
-        right: 50,
-        left: 50,
+        right: MediaQuery.of(
+                  context,
+                ).size.width >
+                500
+            ? 50
+            : 20,
+        left: MediaQuery.of(
+                  context,
+                ).size.width >
+                500
+            ? 50
+            : 20,
       ),
       title: const Text(
         'Members for contract',

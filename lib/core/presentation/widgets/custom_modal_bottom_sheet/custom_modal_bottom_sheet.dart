@@ -72,47 +72,54 @@ class _CustomBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return CustomScrollView(
-      shrinkWrap: true,
-      slivers: <Widget>[
-        SliverAppBar(
-          toolbarHeight: ApplicationTheme.appBarHeight,
-          pinned: true,
-          title: title != null
-              ? Row(
-                  children: <Widget>[
-                    const CustomCloseButton(),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    DefaultTextStyle.merge(
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(
+          context,
+        ).viewInsets.bottom,
+      ),
+      child: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverAppBar(
+            toolbarHeight: ApplicationTheme.appBarHeight,
+            pinned: true,
+            title: title != null
+                ? Row(
+                    children: <Widget>[
+                      const CustomCloseButton(),
+                      const SizedBox(
+                        width: 20,
                       ),
-                      child: title!,
-                    ),
-                  ],
-                )
-              : null,
-          automaticallyImplyLeading: false,
-        ),
-        SliverPadding(
-          padding: padding.add(
-            EdgeInsets.only(
-              bottom: MediaQuery.of(
-                        context,
-                      ).padding.bottom !=
-                      0
-                  ? MediaQuery.of(
-                        context,
-                      ).padding.bottom *
-                      2
-                  : 20,
-            ),
+                      DefaultTextStyle.merge(
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        child: title!,
+                      ),
+                    ],
+                  )
+                : null,
+            automaticallyImplyLeading: false,
           ),
-          sliver: child,
-        ),
-      ],
+          SliverPadding(
+            padding: padding.add(
+              EdgeInsets.only(
+                bottom: MediaQuery.of(
+                          context,
+                        ).padding.bottom !=
+                        0
+                    ? MediaQuery.of(
+                          context,
+                        ).padding.bottom *
+                        2
+                    : 20,
+              ),
+            ),
+            sliver: child,
+          ),
+        ],
+      ),
     );
   }
 }
