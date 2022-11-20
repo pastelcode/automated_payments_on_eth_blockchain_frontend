@@ -29,7 +29,7 @@ class AddMember extends ContractSettingsEvent {
   });
 
   /// The member to add to the list of members of the main contract.
-  final Member member;
+  final ContractMember member;
 
   @override
   List<Object> get props => [
@@ -47,7 +47,7 @@ class RemoveMember extends ContractSettingsEvent {
   });
 
   /// The member to be deleted.
-  final Member member;
+  final ContractMember member;
 
   @override
   List<Object> get props => [

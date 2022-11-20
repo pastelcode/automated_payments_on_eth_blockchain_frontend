@@ -23,8 +23,8 @@ class ContractSettingsBloc
   ContractSettingsBloc()
       : super(
           const ContractSettingsState(
-            members: <Member>[],
-            lapseds: <Lapsed>[],
+            members: <ContractMember>[],
+            lapseds: <ContractLapse>[],
             duration: null,
           ),
         ) {
@@ -48,7 +48,7 @@ class ContractSettingsBloc
   ) {
     final doesUserAlreadyExist = state.members.indexWhere(
           (
-            Member member,
+            ContractMember member,
           ) {
             return member.address == event.member.address;
           },
@@ -66,7 +66,7 @@ class ContractSettingsBloc
     }
     emit(
       state.copyWith(
-        members: <Member>[
+        members: <ContractMember>[
           ...state.members,
           event.member,
         ],
@@ -80,7 +80,7 @@ class ContractSettingsBloc
   ) {
     final filteredList = state.members.where(
       (
-        Member member,
+        ContractMember member,
       ) {
         return member.address != event.member.address;
       },

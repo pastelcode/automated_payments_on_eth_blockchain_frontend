@@ -1,18 +1,18 @@
-import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/duration.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/contract_duration.dart';
 import 'package:equatable/equatable.dart';
 
-/// {@template lapsed}
-/// A lapsed for the contract.
+/// {@template contract_lapse}
+/// A lapse for the contract.
 /// {@endtemplate}
-class Lapsed extends Equatable {
-  /// {@macro lapsed}
-  const Lapsed({
+class ContractLapse extends Equatable {
+  /// {@macro contract_lapse}
+  const ContractLapse({
     required this.percents,
     required this.every,
     required this.unit,
   });
 
-  /// The percents of the lapseds.
+  /// The percents of the lapses.
   final List<String> percents;
 
   /// The number every lapsed is executed.

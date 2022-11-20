@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-/// {@template member}
+/// {@template contract_member}
 /// A member for the contract.
 /// {@endtemplate}
-class Member extends Equatable {
-  ///
-  const Member({
+class ContractMember extends Equatable {
+  /// {@macro contract_member}
+  const ContractMember({
     required this.address,
     required this.percent,
   });

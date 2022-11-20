@@ -42,7 +42,7 @@ class _NewMemberFormState extends State<NewMemberForm> {
     }
     context.read<ContractSettingsBloc>().add(
           AddMember(
-            member: Member(
+            member: ContractMember(
               address: _newMemberAddressController.text,
               percent: _newMemberPercentController.text,
             ),
