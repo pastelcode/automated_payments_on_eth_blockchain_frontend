@@ -55,7 +55,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
               'Duration',
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     textAlign: TextAlign.center,
                     decoration: const InputDecoration(
                       label: Text(
-                        'Duration',
+                        'Ends in',
                       ),
                       hintText: '4',
                     ),
@@ -110,7 +110,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                       );
                     },
                     hint: const Text(
-                      'Unit',
+                      'Time unit',
                     ),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (

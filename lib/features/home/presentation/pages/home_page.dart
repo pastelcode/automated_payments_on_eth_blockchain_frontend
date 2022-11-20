@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(
                   context,
                 ).colorScheme.onSurface,
-                height: ApplicationTheme.appBarHeight - 45,
+                height: ApplicationTheme.appBarHeight - 55,
                 semanticsLabel: 'Ethereum',
               ),
             ),
@@ -71,8 +71,8 @@ class _HomePageState extends State<HomePage> {
                 ).textTheme.headline5,
               ),
               const _Gap(),
+              const Divider(),
               const MembersTile(),
-              const _Gap(),
               const LapsesTile(),
               const _Gap(),
               Form(
@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                 child: const DurationFormContent(),
               ),
               const _Gap(),
+              const Divider(),
               const _Gap(),
               SignAndExecuteButton(
                 formKeyToValidate: _formKeyToValidate,
