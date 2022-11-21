@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
+part 'about_bottom_sheet.dart';
 part 'appearance_option.dart';
 part 'application_menu_button.dart';
 

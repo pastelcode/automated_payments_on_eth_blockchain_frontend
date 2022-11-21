@@ -1,25 +1,5 @@
 part of 'custom_app_bar.dart';
 
-class _AppearanceOptions extends StatelessWidget {
-  const _AppearanceOptions();
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return ListTile(
-      title: const Text(
-        'Appearance',
-      ),
-      onTap: () {
-        _AppearanceOptionsBottomSheet.show(
-          context: context,
-        );
-      },
-    );
-  }
-}
-
 class _AppearanceOptionsBottomSheet extends StatelessWidget {
   const _AppearanceOptionsBottomSheet();
 

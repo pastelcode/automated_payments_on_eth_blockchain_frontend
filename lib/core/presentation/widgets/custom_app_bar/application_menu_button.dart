@@ -48,8 +48,27 @@ class _ApplicationMenuBottomSheet extends StatelessWidget {
   ) {
     return ListView(
       shrinkWrap: true,
-      children: const <Widget>[
-        _AppearanceOptions(),
+      children: <Widget>[
+        ListTile(
+          title: const Text(
+            'Appearance',
+          ),
+          onTap: () {
+            _AppearanceOptionsBottomSheet.show(
+              context: context,
+            );
+          },
+        ),
+        ListTile(
+          title: const Text(
+            'About',
+          ),
+          onTap: () {
+            _AboutBottomSheet.show(
+              context: context,
+            );
+          },
+        ),
       ],
     );
   }
