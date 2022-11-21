@@ -16,7 +16,7 @@ class ApplicationMenuButton extends StatelessWidget {
     return IconButton(
       tooltip: 'Settings',
       icon: const Icon(
-        FlutterRemix.settings_5_line,
+        FlutterRemix.more_fill,
       ),
       onPressed: () {
         _ApplicationMenuBottomSheet.show(
