@@ -84,7 +84,8 @@ class _CustomBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return Padding(
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
       // This padding allow the keyboard to be visible if there is any text
       // field in this bottom sheet.
       padding: EdgeInsets.only(
@@ -96,7 +97,6 @@ class _CustomBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AppBar(
-            toolbarHeight: ApplicationTheme.appBarHeight,
             automaticallyImplyLeading: false,
             title: Row(
               children: <Widget>[
