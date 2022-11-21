@@ -100,6 +100,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                 Expanded(
                   child: DropdownButtonFormField<DurationUnit>(
                     elevation: 0,
+                    isExpanded: true,
                     value: state.duration?.unit,
                     onChanged: (
                       DurationUnit? unit,
