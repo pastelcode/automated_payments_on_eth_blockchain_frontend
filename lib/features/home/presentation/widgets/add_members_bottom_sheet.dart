@@ -21,20 +21,8 @@ class AddMembersBottomSheet extends StatefulWidget {
   }) async {
     await showCustomModalBottomSheet<void>(
       context: context,
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 15,
-        right: MediaQuery.of(
-                  context,
-                ).size.width >
-                500
-            ? 50
-            : 20,
-        left: MediaQuery.of(
-                  context,
-                ).size.width >
-                500
-            ? 50
-            : 20,
       ),
       title: const Text(
         'Members',

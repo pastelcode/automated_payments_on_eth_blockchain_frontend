@@ -9,7 +9,9 @@ import 'package:flutter/services.dart';
 /// `shrinkWrap: true` to pass [child] to take advantage of Flutter's Hot
 /// Reload.
 ///
-/// If [padding] is null it defaults to `EdgeInsets.symmetric(horizontal: 20).`
+/// If [padding] is null it defaults to `EdgeInsets.symmetric(horizontal: 20)`
+/// for mobile and `EdgeInsets.symmetric(horizontal: 50)` for desktop or large
+/// display devices.`
 Future<T?> showCustomModalBottomSheet<T>({
   required BuildContext context,
   Widget? title,
@@ -42,12 +44,18 @@ Future<T?> showCustomModalBottomSheet<T>({
     builder: (
       BuildContext context,
     ) {
+      final defaultPadding = EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(
+                  context,
+                ).size.width >=
+                500
+            ? 50
+            : 20,
+      );
+
       return _CustomBottomSheet(
         title: title,
-        padding: padding ??
-            const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
+        padding: padding != null ? padding + defaultPadding : defaultPadding,
         child: child,
       );
     },
