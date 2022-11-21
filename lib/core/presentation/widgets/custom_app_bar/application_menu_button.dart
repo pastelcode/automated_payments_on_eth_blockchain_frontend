@@ -64,7 +64,7 @@ class _ApplicationMenuBottomSheet extends StatelessWidget {
             'About',
           ),
           onTap: () {
-            _AboutBottomSheet.show(
+            AboutBottomSheet.show(
               context: context,
             );
           },
