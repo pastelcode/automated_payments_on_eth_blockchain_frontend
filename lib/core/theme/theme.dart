@@ -87,6 +87,7 @@ mixin ApplicationTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: buttonStyle,
       ),
+      errorColor: colorScheme.error,
     );
   }
 
