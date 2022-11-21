@@ -46,11 +46,11 @@ Lapses${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
                 ).textTheme.caption!.copyWith(
                       color: Theme.of(
                         context,
-                      ).colorScheme.onErrorContainer,
+                      ).colorScheme.onError,
                     ),
                 backgroundColor: Theme.of(
                   context,
-                ).colorScheme.errorContainer,
+                ).colorScheme.error,
               ),
             ],
             const Spacer(),
