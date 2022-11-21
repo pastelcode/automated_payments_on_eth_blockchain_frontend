@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// If [address] and [percent] are null the text fields are editable, so a user
 /// can be added using those text fields.
 /// {@endtemplate}
-class MemberEntry extends StatelessWidget {
+class MemberEntry extends StatefulWidget {
   /// {@macro member_entry}
   const MemberEntry({
     super.key,
@@ -49,10 +49,29 @@ If entry is for read-only purposes, the address and percent must not be null whi
   final void Function()? onSubmitted;
 
   @override
+  State<MemberEntry> createState() => _MemberEntryState();
+}
+
+class _MemberEntryState extends State<MemberEntry> {
+  late FocusNode _addressFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _addressFocusNode = FocusNode();
+  }
+
+  @override
   Widget build(
     BuildContext context,
   ) {
-    final areTextFieldsReadOnly = address != null && percent != null;
+    final areTextFieldsReadOnly =
+        widget.address != null && widget.percent != null;
+    // When the user wants to add a new member, the address text field will
+    // automatically be focused for the keyboard to appear.
+    if (!areTextFieldsReadOnly) {
+      _addressFocusNode.requestFocus();
+    }
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,12 +80,13 @@ If entry is for read-only purposes, the address and percent must not be null whi
           flex: 2,
           child: TextFormField(
             key: Key(
-              address ?? '',
+              widget.address ?? '',
             ),
             autofocus: true,
             readOnly: areTextFieldsReadOnly,
-            initialValue: address,
-            controller: addressController,
+            initialValue: widget.address,
+            controller: widget.addressController,
+            focusNode: _addressFocusNode,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (
               String? value,
@@ -95,18 +115,18 @@ If entry is for read-only purposes, the address and percent must not be null whi
         Expanded(
           child: TextFormField(
             key: Key(
-              percent ?? '',
+              widget.percent ?? '',
             ),
             readOnly: areTextFieldsReadOnly,
-            initialValue: percent,
-            controller: percentController,
+            initialValue: widget.percent,
+            controller: widget.percentController,
             keyboardType: const TextInputType.numberWithOptions(
               decimal: true,
             ),
             onFieldSubmitted: (
               _,
             ) {
-              onSubmitted?.call();
+              widget.onSubmitted?.call();
             },
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (
@@ -132,5 +152,11 @@ If entry is for read-only purposes, the address and percent must not be null whi
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _addressFocusNode.dispose();
+    super.dispose();
   }
 }
