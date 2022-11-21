@@ -17,30 +17,50 @@ class MembersTile extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
-      builder: (
-        BuildContext context,
-        ContractSettingsState contractSettingsState,
-      ) {
-        return Row(
-          children: <Widget>[
-            Text(
+    return Row(
+      children: <Widget>[
+        BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+          buildWhen: (
+            ContractSettingsState previousContractSettingsState,
+            ContractSettingsState currentContractSettingsState,
+          ) {
+            return currentContractSettingsState.members.length !=
+                previousContractSettingsState.members.length;
+          },
+          builder: (
+            BuildContext context,
+            ContractSettingsState contractSettingsState,
+          ) {
+            return Text(
               'Members (${contractSettingsState.members.length})',
-            ),
-            const Spacer(),
-            Button(
-              onPressed: () {
-                AddMembersBottomSheet.show(
-                  context: context,
-                );
-              },
-              title: Text(
-                contractSettingsState.members.isEmpty ? 'Set up' : 'View',
-              ),
-            )
-          ],
-        );
-      },
+            );
+          },
+        ),
+        const Spacer(),
+        Button(
+          onPressed: () {
+            AddMembersBottomSheet.show(
+              context: context,
+            );
+          },
+          title:
+              BlocSelector<ContractSettingsBloc, ContractSettingsState, bool>(
+            selector: (
+              ContractSettingsState contractSettingsState,
+            ) {
+              return contractSettingsState.members.isEmpty;
+            },
+            builder: (
+              BuildContext context,
+              bool isMembersListEmpty,
+            ) {
+              return Text(
+                isMembersListEmpty ? 'Set up' : 'View',
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }
