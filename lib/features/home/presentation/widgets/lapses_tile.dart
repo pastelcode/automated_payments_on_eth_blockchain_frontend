@@ -3,7 +3,6 @@ import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.d
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 
 /// {@template lapses_tile}
 /// A tile to set/view the lapses of the main contract.
@@ -27,7 +26,7 @@ class LapsesTile extends StatelessWidget {
           children: <Widget>[
             Text(
               '''
-Lapseds${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
+Lapses${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
             ),
             if (state.members.isEmpty) ...[
               const SizedBox(
@@ -39,22 +38,19 @@ Lapseds${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
                     ApplicationTheme.borderRadius,
                   ),
                 ),
-                avatar: Icon(
-                  FlutterRemix.error_warning_line,
-                  size: Theme.of(
-                        context,
-                      ).textTheme.caption!.fontSize! *
-                      1.5,
-                ),
                 label: const Text(
                   'Set members first',
                 ),
                 labelStyle: Theme.of(
                   context,
-                ).textTheme.caption,
-                backgroundColor: Colors.blue.withOpacity(
-                  .1,
-                ),
+                ).textTheme.caption!.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onErrorContainer,
+                    ),
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.errorContainer,
               ),
             ],
             const Spacer(),
