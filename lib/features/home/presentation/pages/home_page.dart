@@ -1,7 +1,5 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/widgets.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 /// {@template home_page}
@@ -25,26 +23,9 @@ class _HomePageState extends State<HomePage> {
     BuildContext context,
   ) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: Row(
-          children: <Widget>[
-            const Text(
-              'Automated Payments',
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Tooltip(
-              message: 'Ethereum',
-              child: Assets.illustrations.ethereumEthLogo.svg(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface,
-                height: ApplicationTheme.appBarHeight - 55,
-                semanticsLabel: 'Ethereum',
-              ),
-            ),
-          ],
+      appBar: const CustomAppBar(
+        title: Text(
+          'Contract settings',
         ),
       ),
       body: Center(
@@ -60,18 +41,7 @@ class _HomePageState extends State<HomePage> {
                   ).size.width *
                   .9,
           child: ListView(
-            padding: const EdgeInsets.only(
-              top: 30,
-            ),
             children: <Widget>[
-              Text(
-                'Contract settings',
-                style: Theme.of(
-                  context,
-                ).textTheme.headline5,
-              ),
-              const _Gap(),
-              const Divider(),
               const MembersTile(),
               const LapsesTile(),
               const _Gap(),
@@ -84,8 +54,6 @@ class _HomePageState extends State<HomePage> {
               SignAndExecuteButton(
                 formKeyToValidate: _formKeyToValidate,
               ),
-              const _Gap(),
-              const Divider(),
             ],
           ),
         ),
