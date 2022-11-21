@@ -13,20 +13,24 @@ class ApplicationMenuButton extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return Button(
+    return IconButton(
       tooltip: 'Settings',
-      title: const Icon(
+      icon: const Icon(
         FlutterRemix.settings_5_line,
       ),
       onPressed: () {
-        _showApplicationMenu(
+        _ApplicationMenuBottomSheet.show(
           context: context,
         );
       },
     );
   }
+}
 
-  Future<void> _showApplicationMenu({
+class _ApplicationMenuBottomSheet extends StatelessWidget {
+  const _ApplicationMenuBottomSheet();
+
+  static Future<void> show({
     required BuildContext context,
   }) async {
     await showCustomModalBottomSheet<void>(
@@ -34,24 +38,19 @@ class ApplicationMenuButton extends StatelessWidget {
       title: const Text(
         'Settings',
       ),
-      child: const _ApplicationMenuButtonContent(),
+      child: const _ApplicationMenuBottomSheet(),
     );
   }
-}
-
-class _ApplicationMenuButtonContent extends StatelessWidget {
-  const _ApplicationMenuButtonContent();
 
   @override
   Widget build(
     BuildContext context,
   ) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        <Widget>[
-          const _AppearanceOptions(),
-        ],
-      ),
+    return ListView(
+      shrinkWrap: true,
+      children: const <Widget>[
+        _AppearanceOptions(),
+      ],
     );
   }
 }

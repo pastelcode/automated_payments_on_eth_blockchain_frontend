@@ -9,17 +9,45 @@ import 'package:flutter_remix/flutter_remix.dart';
 /// The content of a bottom sheet that shows the list of members of the main
 /// contract and a option to add one more.
 /// {@endtemplate}
-class MembersBottomSheet extends StatefulWidget {
+class AddMembersBottomSheet extends StatefulWidget {
   /// {@macro members_bottom_sheet}
-  const MembersBottomSheet({
+  const AddMembersBottomSheet({
     super.key,
   });
 
+  /// Shows a modal bottom sheet with this widget as content.
+  static Future<void> show({
+    required BuildContext context,
+  }) async {
+    await showCustomModalBottomSheet<void>(
+      context: context,
+      padding: EdgeInsets.only(
+        top: 15,
+        right: MediaQuery.of(
+                  context,
+                ).size.width >
+                500
+            ? 50
+            : 20,
+        left: MediaQuery.of(
+                  context,
+                ).size.width >
+                500
+            ? 50
+            : 20,
+      ),
+      title: const Text(
+        'Members',
+      ),
+      child: const AddMembersBottomSheet(),
+    );
+  }
+
   @override
-  State<MembersBottomSheet> createState() => _MembersBottomSheetState();
+  State<AddMembersBottomSheet> createState() => _AddMembersBottomSheetState();
 }
 
-class _MembersBottomSheetState extends State<MembersBottomSheet> {
+class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
   final _isNewMemberFormVisible = ValueNotifier<bool>(
     false,
   );
@@ -41,73 +69,72 @@ class _MembersBottomSheetState extends State<MembersBottomSheet> {
         BuildContext context,
         ContractSettingsState contractSettingsState,
       ) {
-        return SliverList(
-          delegate: SliverChildListDelegate(
-            <Widget>[
-              const MembersList(),
-              ValueListenableBuilder(
-                valueListenable: _isNewMemberFormVisible,
-                builder: (
-                  BuildContext context,
-                  bool isNewMemberFormVisible,
-                  _,
-                ) {
-                  if (!isNewMemberFormVisible) {
-                    return Column(
-                      children: <Widget>[
-                        if (contractSettingsState.members.isEmpty)
-                          const NoMembersBanner(),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Button(
-                          onPressed: _showNewMemberForm,
-                          icon: const Icon(
-                            FlutterRemix.add_line,
-                          ),
-                          title: const Text(
-                            'Add new',
-                          ),
-                        ),
-                      ],
-                    );
-                  }
+        return ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            const MembersList(),
+            ValueListenableBuilder(
+              valueListenable: _isNewMemberFormVisible,
+              builder: (
+                BuildContext context,
+                bool isNewMemberFormVisible,
+                _,
+              ) {
+                if (!isNewMemberFormVisible) {
                   return Column(
                     children: <Widget>[
-                      if (contractSettingsState.members.isNotEmpty) ...[
-                        const SizedBox(
-                          height: 16,
+                      if (contractSettingsState.members.isEmpty)
+                        const NoMembersBanner(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Button(
+                        onPressed: _showNewMemberForm,
+                        icon: const Icon(
+                          FlutterRemix.add_line,
                         ),
-                        const Divider(
-                          thickness: 1,
+                        title: const Text(
+                          'Add new',
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                      NewMemberForm(
-                        onCancel: _hideNewMemberForm,
                       ),
                     ],
                   );
-                },
+                }
+                return Column(
+                  children: <Widget>[
+                    if (contractSettingsState.members.isNotEmpty) ...[
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Divider(
+                        thickness: 1,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                    NewMemberForm(
+                      onCancel: _hideNewMemberForm,
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Button(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).pop();
+              },
+              title: const Text(
+                'Done',
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Button(
-                onPressed: () {
-                  Navigator.of(
-                    context,
-                  ).pop();
-                },
-                title: const Text(
-                  'Done',
-                ),
-                isPrimary: true,
-              ),
-            ],
-          ),
+              isPrimary: true,
+            ),
+          ],
         );
       },
     );

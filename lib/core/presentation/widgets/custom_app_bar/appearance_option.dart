@@ -12,14 +12,18 @@ class _AppearanceOptions extends StatelessWidget {
         'Appearance',
       ),
       onTap: () {
-        _showAppearanceOption(
+        _AppearanceOptionsBottomSheet.show(
           context: context,
         );
       },
     );
   }
+}
 
-  Future<void> _showAppearanceOption({
+class _AppearanceOptionsBottomSheet extends StatelessWidget {
+  const _AppearanceOptionsBottomSheet();
+
+  static Future<void> show({
     required BuildContext context,
   }) async {
     await showCustomModalBottomSheet<void>(
@@ -27,77 +31,72 @@ class _AppearanceOptions extends StatelessWidget {
       title: const Text(
         'Appearance',
       ),
-      child: const _AppearanceOptionsContent(),
+      child: const _AppearanceOptionsBottomSheet(),
     );
   }
-}
-
-class _AppearanceOptionsContent extends StatelessWidget {
-  const _AppearanceOptionsContent();
 
   @override
   Widget build(
     BuildContext context,
   ) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        <Widget>[
-          BlocBuilder<ThemeBloc, ThemeMode>(
-            builder: (
-              BuildContext context,
-              ThemeMode state,
-            ) {
-              return GridView.count(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                crossAxisSpacing: 5,
-                children: <Widget>[
-                  _ChangeAppearanceButton(
-                    themeMode: ThemeMode.light,
-                    currentThemeMode: state,
-                    name: 'Light',
-                    icon: const Icon(
-                      FlutterRemix.sun_line,
-                      size: 32,
-                    ),
-                    selectedIcon: const Icon(
-                      FlutterRemix.sun_fill,
-                      size: 32,
-                    ),
+    return ListView(
+      shrinkWrap: true,
+      children: <Widget>[
+        BlocBuilder<ThemeBloc, ThemeMode>(
+          builder: (
+            BuildContext context,
+            ThemeMode themeMode,
+          ) {
+            return GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              crossAxisSpacing: 5,
+              children: <Widget>[
+                _ChangeAppearanceButton(
+                  themeMode: ThemeMode.light,
+                  currentThemeMode: themeMode,
+                  name: 'Light',
+                  icon: const Icon(
+                    FlutterRemix.sun_line,
+                    size: 32,
                   ),
-                  _ChangeAppearanceButton(
-                    themeMode: ThemeMode.dark,
-                    currentThemeMode: state,
-                    name: 'Dark',
-                    icon: const Icon(
-                      FlutterRemix.moon_line,
-                      size: 32,
-                    ),
-                    selectedIcon: const Icon(
-                      FlutterRemix.moon_fill,
-                      size: 32,
-                    ),
+                  selectedIcon: const Icon(
+                    FlutterRemix.sun_fill,
+                    size: 32,
                   ),
-                  _ChangeAppearanceButton(
-                    themeMode: ThemeMode.system,
-                    currentThemeMode: state,
-                    name: 'System',
-                    icon: const Icon(
-                      FlutterRemix.macbook_line,
-                      size: 32,
-                    ),
-                    selectedIcon: const Icon(
-                      FlutterRemix.macbook_fill,
-                      size: 32,
-                    ),
+                ),
+                _ChangeAppearanceButton(
+                  themeMode: ThemeMode.dark,
+                  currentThemeMode: themeMode,
+                  name: 'Dark',
+                  icon: const Icon(
+                    FlutterRemix.moon_line,
+                    size: 32,
                   ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
+                  selectedIcon: const Icon(
+                    FlutterRemix.moon_fill,
+                    size: 32,
+                  ),
+                ),
+                _ChangeAppearanceButton(
+                  themeMode: ThemeMode.system,
+                  currentThemeMode: themeMode,
+                  name: 'System',
+                  icon: const Icon(
+                    FlutterRemix.macbook_line,
+                    size: 32,
+                  ),
+                  selectedIcon: const Icon(
+                    FlutterRemix.macbook_fill,
+                    size: 32,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

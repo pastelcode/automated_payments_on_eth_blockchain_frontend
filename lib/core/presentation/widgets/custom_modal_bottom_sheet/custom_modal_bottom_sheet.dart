@@ -5,15 +5,16 @@ import 'package:flutter/services.dart';
 
 /// Shows a custom modal bottom sheet.
 ///
-/// Consider using a [StatelessWidget] that returns a [SliverList] to pass
-/// [child] to take advantage of Flutter's Hot Reload.
+/// Consider using a [StatelessWidget] that returns a [ListView] with
+/// `shrinkWrap: true` to pass [child] to take advantage of Flutter's Hot
+/// Reload.
+///
+/// If [padding] is null it defaults to `EdgeInsets.symmetric(horizontal: 20).`
 Future<T?> showCustomModalBottomSheet<T>({
   required BuildContext context,
   Widget? title,
   Widget? child,
-  EdgeInsets padding = const EdgeInsets.symmetric(
-    horizontal: 20,
-  ),
+  EdgeInsets? padding,
 }) async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -43,7 +44,10 @@ Future<T?> showCustomModalBottomSheet<T>({
     ) {
       return _CustomBottomSheet(
         title: title,
-        padding: padding,
+        padding: padding ??
+            const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
         child: child,
       );
     },
@@ -59,8 +63,8 @@ Future<T?> showCustomModalBottomSheet<T>({
 
 class _CustomBottomSheet extends StatelessWidget {
   const _CustomBottomSheet({
-    this.title,
-    this.child,
+    required this.title,
+    required this.child,
     required this.padding,
   });
 
@@ -73,50 +77,53 @@ class _CustomBottomSheet extends StatelessWidget {
     BuildContext context,
   ) {
     return Padding(
+      // This padding allow the keyboard to be visible if there is any text
+      // field in this bottom sheet.
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(
           context,
         ).viewInsets.bottom,
       ),
-      child: CustomScrollView(
-        shrinkWrap: true,
-        slivers: <Widget>[
-          SliverAppBar(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          AppBar(
             toolbarHeight: ApplicationTheme.appBarHeight,
-            pinned: true,
-            title: title != null
-                ? Row(
-                    children: <Widget>[
-                      const CustomCloseButton(),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      DefaultTextStyle.merge(
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        child: title!,
-                      ),
-                    ],
-                  )
-                : null,
             automaticallyImplyLeading: false,
-          ),
-          SliverPadding(
-            padding: padding.add(
-              EdgeInsets.only(
-                bottom: MediaQuery.of(
-                          context,
-                        ).padding.bottom !=
-                        0
-                    ? MediaQuery.of(
-                          context,
-                        ).padding.bottom *
-                        2
-                    : 20,
-              ),
+            title: Row(
+              children: <Widget>[
+                const CustomCloseButton(),
+                const SizedBox(
+                  width: 20,
+                ),
+                if (title != null)
+                  DefaultTextStyle.merge(
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    child: title!,
+                  ),
+              ],
             ),
-            sliver: child,
+          ),
+          Padding(
+            padding: padding +
+                EdgeInsets.only(
+                  bottom: MediaQuery.of(
+                                context,
+                              ).padding.bottom !=
+                              0 &&
+                          MediaQuery.of(
+                                context,
+                              ).padding.bottom <=
+                              20
+                      ? MediaQuery.of(
+                            context,
+                          ).padding.bottom *
+                          2
+                      : 20,
+                ),
+            child: child,
           ),
         ],
       ),

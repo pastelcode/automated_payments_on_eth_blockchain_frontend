@@ -1,6 +1,6 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/add_members_bottom_sheet.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,33 +12,6 @@ class MembersTile extends StatelessWidget {
   const MembersTile({
     super.key,
   });
-
-  Future<void> _showMembersList({
-    required BuildContext context,
-  }) async {
-    await showCustomModalBottomSheet<void>(
-      context: context,
-      padding: EdgeInsets.only(
-        top: 15,
-        right: MediaQuery.of(
-                  context,
-                ).size.width >
-                500
-            ? 50
-            : 20,
-        left: MediaQuery.of(
-                  context,
-                ).size.width >
-                500
-            ? 50
-            : 20,
-      ),
-      title: const Text(
-        'Members for contract',
-      ),
-      child: const MembersBottomSheet(),
-    );
-  }
 
   @override
   Widget build(
@@ -57,7 +30,7 @@ class MembersTile extends StatelessWidget {
             const Spacer(),
             Button(
               onPressed: () {
-                _showMembersList(
+                AddMembersBottomSheet.show(
                   context: context,
                 );
               },
