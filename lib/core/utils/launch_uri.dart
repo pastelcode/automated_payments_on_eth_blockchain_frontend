@@ -11,9 +11,7 @@ Future<void> launchUri({
 }) async {
   if (!await canLaunchUrl(uri)) {
     CustomSnackBar.showInformationSnackBar(
-      content: Text(
-        '$uri',
-      ),
+      message: '$uri',
     );
   }
   await launchUrl(

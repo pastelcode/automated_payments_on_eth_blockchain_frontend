@@ -8,7 +8,7 @@ mixin CustomSnackBar {
 
   /// Shows a snack bar with blue background and an information prefix icon.
   static void showInformationSnackBar({
-    required Widget content,
+    required String message,
   }) {
     scaffoldMessengerKey.currentState!.hideCurrentSnackBar();
     scaffoldMessengerKey.currentState!.showSnackBar(
@@ -22,7 +22,11 @@ mixin CustomSnackBar {
             const SizedBox(
               width: 10,
             ),
-            content,
+            Expanded(
+              child: Text(
+                message,
+              ),
+            ),
           ],
         ),
       ),
@@ -31,7 +35,7 @@ mixin CustomSnackBar {
 
   /// Shows a snack bar with amber background and a warning prefix icon.
   static void showWarningSnackBar({
-    required Widget content,
+    required String message,
   }) {
     scaffoldMessengerKey.currentState!.hideCurrentSnackBar();
     scaffoldMessengerKey.currentState!.showSnackBar(
@@ -45,7 +49,11 @@ mixin CustomSnackBar {
             const SizedBox(
               width: 10,
             ),
-            content,
+            Expanded(
+              child: Text(
+                message,
+              ),
+            ),
           ],
         ),
       ),
@@ -54,7 +62,7 @@ mixin CustomSnackBar {
 
   /// Shows a snack bar with red background and a error prefix icon.
   static void showErrorSnackBar({
-    required Widget content,
+    required String message,
   }) {
     scaffoldMessengerKey.currentState!.hideCurrentSnackBar();
     scaffoldMessengerKey.currentState!.showSnackBar(
@@ -68,7 +76,11 @@ mixin CustomSnackBar {
             const SizedBox(
               width: 10,
             ),
-            content,
+            Expanded(
+              child: Text(
+                message,
+              ),
+            ),
           ],
         ),
       ),
@@ -77,7 +89,7 @@ mixin CustomSnackBar {
 
   /// Shows a snack bar with green background and a check prefix icon.
   static void showSuccessSnackBar({
-    required Widget content,
+    required String message,
   }) {
     scaffoldMessengerKey.currentState!.hideCurrentSnackBar();
     scaffoldMessengerKey.currentState!.showSnackBar(
@@ -91,7 +103,11 @@ mixin CustomSnackBar {
             const SizedBox(
               width: 10,
             ),
-            content,
+            Expanded(
+              child: Text(
+                message,
+              ),
+            ),
           ],
         ),
       ),
