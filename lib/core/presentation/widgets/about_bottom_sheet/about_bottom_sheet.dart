@@ -30,8 +30,7 @@ class AboutBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: <Widget>[
         ApplicationInformation.logo.svg(
           color: Theme.of(
