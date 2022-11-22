@@ -21,9 +21,6 @@ class AddMembersBottomSheet extends StatefulWidget {
   }) async {
     await showCustomModalBottomSheet<void>(
       context: context,
-      padding: const EdgeInsets.only(
-        top: 15,
-      ),
       title: const Text(
         'Members',
       ),
@@ -57,9 +54,12 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
         BuildContext context,
         ContractSettingsState contractSettingsState,
       ) {
-        return ListView(
-          shrinkWrap: true,
+        return Column(
           children: <Widget>[
+            const SumOfMembersPercentMustBe100Banner(),
+            const SizedBox(
+              height: 40,
+            ),
             const MembersList(),
             ValueListenableBuilder(
               valueListenable: _isNewMemberFormVisible,
@@ -73,9 +73,6 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
                     children: <Widget>[
                       if (contractSettingsState.members.isEmpty)
                         const NoMembersBanner(),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Button(
                         onPressed: _showNewMemberForm,
                         icon: const Icon(
@@ -109,18 +106,21 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
               },
             ),
             const SizedBox(
-              height: 15,
+              height: 5,
             ),
-            Button(
-              onPressed: () {
-                Navigator.of(
-                  context,
-                ).pop();
-              },
-              title: const Text(
-                'Done',
+            SizedBox(
+              width: double.infinity,
+              child: Button(
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).pop();
+                },
+                title: const Text(
+                  'Done',
+                ),
+                isPrimary: true,
               ),
-              isPrimary: true,
             ),
           ],
         );

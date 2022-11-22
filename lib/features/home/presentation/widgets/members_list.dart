@@ -39,6 +39,7 @@ class MembersList extends StatelessWidget {
         return ListView.separated(
           itemCount: contractSettingsState.members.length,
           shrinkWrap: true,
+          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (
             _,

@@ -5,9 +5,8 @@ import 'package:flutter/services.dart';
 
 /// Shows a custom modal bottom sheet.
 ///
-/// Consider using a [StatelessWidget] that returns a [ListView] with
-/// `shrinkWrap: true` to pass [child] to take advantage of Flutter's Hot
-/// Reload.
+/// Consider using a [StatelessWidget] that returns a [Column] to pass [child]
+/// to take advantage of Flutter's Hot Reload.
 ///
 /// If [padding] is null it defaults to `EdgeInsets.symmetric(horizontal: 20)`
 /// for mobile and `EdgeInsets.symmetric(horizontal: 50)` for desktop or large
@@ -27,11 +26,7 @@ Future<T?> showCustomModalBottomSheet<T>({
   final result = await showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
-    constraints: BoxConstraints(
-      maxHeight: MediaQuery.of(
-            context,
-          ).size.height *
-          0.9,
+    constraints: const BoxConstraints(
       maxWidth: 1000,
     ),
     shape: RoundedRectangleBorder(
@@ -84,19 +79,16 @@ class _CustomBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      // This padding allow the keyboard to be visible if there is any text
-      // field in this bottom sheet.
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(
-          context,
-        ).viewInsets.bottom,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          AppBar(
+    return DraggableScrollableSheet(
+      maxChildSize: .85,
+      initialChildSize: .85,
+      expand: false,
+      builder: (
+        BuildContext context,
+        ScrollController scrollController,
+      ) {
+        return Scaffold(
+          appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Row(
               children: <Widget>[
@@ -114,27 +106,30 @@ class _CustomBottomSheet extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: padding +
-                EdgeInsets.only(
-                  bottom: MediaQuery.of(
-                                context,
-                              ).padding.bottom !=
-                              0 &&
-                          MediaQuery.of(
-                                context,
-                              ).padding.bottom <=
-                              20
-                      ? MediaQuery.of(
-                            context,
-                          ).padding.bottom *
-                          2
-                      : 20,
-                ),
-            child: child,
+          body: SingleChildScrollView(
+            controller: scrollController,
+            child: Padding(
+              padding: padding +
+                  EdgeInsets.only(
+                    bottom: MediaQuery.of(
+                                  context,
+                                ).padding.bottom !=
+                                0 &&
+                            MediaQuery.of(
+                                  context,
+                                ).padding.bottom <=
+                                20
+                        ? MediaQuery.of(
+                              context,
+                            ).padding.bottom *
+                            2
+                        : 20,
+                  ),
+              child: child,
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
