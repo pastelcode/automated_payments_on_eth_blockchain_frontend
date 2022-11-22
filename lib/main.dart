@@ -17,6 +17,20 @@ part 'ui.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  LicenseRegistry.addLicense(
+    () async* {
+      final license = await rootBundle.loadString(
+        'assets/fonts/Inter/OFL.txt',
+      );
+      yield LicenseEntryWithLineBreaks(
+        <String>[
+          'Inter',
+        ],
+        license,
+      );
+    },
+  );
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
