@@ -1,4 +1,3 @@
-import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +23,8 @@ class LapsesTile extends StatelessWidget {
       ) {
         return Row(
           children: <Widget>[
-            Text(
-              '''
-Lapses${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
+            const Text(
+              'Lapse',
             ),
             if (state.members.isEmpty) ...[
               const SizedBox(
@@ -53,14 +51,6 @@ Lapses${state.lapseds.isEmpty ? '' : ' (${state.lapseds.length})'}''',
                 ).colorScheme.error,
               ),
             ],
-            const Spacer(),
-            Button(
-              onPressed: state.members.isEmpty ? null : () {},
-              title: Text(
-                state.lapseds.isEmpty ? 'Set up' : 'View',
-              ),
-              tooltip: state.members.isEmpty ? 'Set members first' : '',
-            ),
           ],
         );
       },

@@ -8,7 +8,7 @@ abstract class ContractSettingsEvent extends Equatable {
   const ContractSettingsEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 /// {@template reset_failure}
@@ -25,15 +25,20 @@ class ResetFailure extends ContractSettingsEvent {
 class AddMember extends ContractSettingsEvent {
   /// {@macro add_member}
   const AddMember({
-    required this.member,
+    required this.address,
+    required this.percent,
   });
 
-  /// The member to add to the list of members of the main contract.
-  final ContractMember member;
+  /// The address of member to add.
+  final String address;
+
+  /// The percent the member is going to pay.
+  final String percent;
 
   @override
-  List<Object> get props => [
-        member,
+  List<Object?> get props => [
+        address,
+        percent,
       ];
 }
 
@@ -50,7 +55,7 @@ class RemoveMember extends ContractSettingsEvent {
   final ContractMember member;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         member,
       ];
 }
@@ -61,14 +66,19 @@ class RemoveMember extends ContractSettingsEvent {
 class UpdateDuration extends ContractSettingsEvent {
   /// {@macro update_duration}
   const UpdateDuration({
-    required this.duration,
+    this.end,
+    this.unit,
   });
 
-  /// The duration for the contract.
-  final ContractDuration duration;
+  /// The `ends in` for the contract.
+  final String? end;
+
+  /// The time unit for [end].
+  final DurationUnit? unit;
 
   @override
-  List<Object> get props => [
-        duration,
+  List<Object?> get props => [
+        end,
+        unit,
       ];
 }

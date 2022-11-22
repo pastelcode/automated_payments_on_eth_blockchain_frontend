@@ -14,7 +14,7 @@ class ContractMember extends Equatable {
   final String address;
 
   /// The percent this member is going to pay over the contract.
-  final String percent;
+  final num percent;
 
   @override
   List<Object?> get props => [

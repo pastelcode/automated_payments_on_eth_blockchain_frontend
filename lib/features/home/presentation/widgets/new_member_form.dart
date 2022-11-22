@@ -1,6 +1,5 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/member_entry.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +41,8 @@ class _NewMemberFormState extends State<NewMemberForm> {
     }
     context.read<ContractSettingsBloc>().add(
           AddMember(
-            member: ContractMember(
-              address: _newMemberAddressController.text,
-              percent: _newMemberPercentController.text,
-            ),
+            address: _newMemberAddressController.text,
+            percent: _newMemberPercentController.text,
           ),
         );
   }

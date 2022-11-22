@@ -28,13 +28,13 @@ class _DurationFormContentState extends State<DurationFormContent> {
 
   void _updateDuration({
     required BuildContext context,
+    String? end,
+    DurationUnit? unit,
   }) {
     context.read<ContractSettingsBloc>().add(
           UpdateDuration(
-            duration: ContractDuration(
-              end: _endController.text,
-              unit: _unit.value,
-            ),
+            end: end,
+            unit: unit,
           ),
         );
   }
@@ -90,6 +90,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     ) {
                       _updateDuration(
                         context: context,
+                        end: value,
                       );
                     },
                   ),
@@ -101,13 +102,13 @@ class _DurationFormContentState extends State<DurationFormContent> {
                   child: DropdownButtonFormField<DurationUnit>(
                     elevation: 0,
                     isExpanded: true,
-                    value: state.duration?.unit,
+                    value: state.duration.unit,
                     onChanged: (
                       DurationUnit? unit,
                     ) {
-                      _unit.value = unit;
                       _updateDuration(
                         context: context,
+                        unit: unit,
                       );
                     },
                     hint: const Text(

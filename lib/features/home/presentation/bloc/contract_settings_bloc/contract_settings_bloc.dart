@@ -1,4 +1,5 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/errors/errors.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/data/models/models.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,8 @@ part 'contract_settings_state.dart';
 ///
 /// Events:
 /// - [AddMember]
-/// - [UpdateLapseds]
+/// - [RemoveMember]
+/// - [ResetFailure]
 /// - [UpdateDuration]
 ///
 /// States:
@@ -24,8 +26,14 @@ class ContractSettingsBloc
       : super(
           const ContractSettingsState(
             members: <ContractMember>[],
-            lapseds: <ContractLapse>[],
-            duration: null,
+            lapses: ContractLapse(
+              every: null,
+              unit: null,
+            ),
+            duration: ContractDuration(
+              end: null,
+              unit: null,
+            ),
           ),
         ) {
     on<AddMember>(
@@ -50,7 +58,7 @@ class ContractSettingsBloc
           (
             ContractMember member,
           ) {
-            return member.address == event.member.address;
+            return member.address == event.address;
           },
         ) !=
         -1;
@@ -64,11 +72,17 @@ class ContractSettingsBloc
       );
       return;
     }
+    final parsedPercent = num.parse(
+      event.percent,
+    );
     emit(
       state.copyWith(
         members: <ContractMember>[
           ...state.members,
-          event.member,
+          ContractMember(
+            address: event.address,
+            percent: parsedPercent,
+          ),
         ],
       ),
     );
@@ -108,7 +122,10 @@ class ContractSettingsBloc
   ) {
     emit(
       state.copyWith(
-        duration: event.duration,
+        duration: state.duration.copyWith(
+          end: event.end,
+          unit: event.unit,
+        ),
       ),
     );
   }
