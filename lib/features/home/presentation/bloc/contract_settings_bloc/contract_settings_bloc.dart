@@ -1,4 +1,4 @@
-import 'package:automated_payments_on_eth_blockchain_frontend/core/errors/errors.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/data/models/models.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:equatable/equatable.dart';
@@ -13,7 +13,6 @@ part 'contract_settings_state.dart';
 /// Events:
 /// - [AddMember]
 /// - [RemoveMember]
-/// - [ResetFailure]
 /// - [UpdateDuration]
 /// - [UpdateLapse]
 ///
@@ -43,9 +42,7 @@ class ContractSettingsBloc
     on<RemoveMember>(
       _handleRemoveMember,
     );
-    on<ResetFailure>(
-      _handleResetFailure,
-    );
+
     on<UpdateDuration>(
       _handleUpdateDuration,
     );
@@ -67,12 +64,8 @@ class ContractSettingsBloc
         ) !=
         -1;
     if (doesUserAlreadyExist) {
-      emit(
-        state.copyWith(
-          failure: AnotherFailure(
-            message: 'Member already added',
-          ),
-        ),
+      CustomSnackBar.showErrorSnackBar(
+        message: 'Member already added',
       );
       return;
     }
@@ -107,16 +100,6 @@ class ContractSettingsBloc
       state.copyWith(
         members: filteredList,
       ),
-    );
-  }
-
-  void _handleResetFailure(
-    ResetFailure event,
-    Emitter<ContractSettingsState> emit,
-  ) {
-    // Sets the `failure` property to `null`.
-    emit(
-      state.copyWith(),
     );
   }
 

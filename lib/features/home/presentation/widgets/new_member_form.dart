@@ -1,5 +1,4 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
-import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/member_entry.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +49,6 @@ class _NewMemberFormState extends State<NewMemberForm> {
   void _clearForm() {
     _newMemberAddressController.clear();
     _newMemberPercentController.clear();
-    context.read<ContractSettingsBloc>().add(
-          const ResetFailure(),
-        );
     widget.onCancel?.call();
   }
 
@@ -88,40 +84,6 @@ class _NewMemberFormState extends State<NewMemberForm> {
                 percentController: _newMemberPercentController,
                 onSubmitted: _saveMember,
               ),
-              if (contractSettingsState.failure != null) ...[
-                const SizedBox(
-                  height: 15,
-                ),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(
-                      .1,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      ApplicationTheme.borderRadius,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(
-                      15,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        const Icon(
-                          FlutterRemix.error_warning_line,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          '${contractSettingsState.failure?.message}',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
               const SizedBox(
                 height: 15,
               ),
@@ -150,14 +112,6 @@ class _NewMemberFormState extends State<NewMemberForm> {
         );
       },
     );
-  }
-
-  @override
-  void deactivate() {
-    context.read<ContractSettingsBloc>().add(
-          const ResetFailure(),
-        );
-    super.deactivate();
   }
 
   @override

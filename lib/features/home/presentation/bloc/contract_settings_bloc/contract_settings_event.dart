@@ -11,14 +11,6 @@ abstract class ContractSettingsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-/// {@template reset_failure}
-/// An event to reset the [ContractSettingsState.failure] property.
-/// {@endtemplate}
-class ResetFailure extends ContractSettingsEvent {
-  /// {@macro reset_failure}
-  const ResetFailure();
-}
-
 /// {@template add_member}
 /// An event to add a new member for the main contract.
 /// {@endtemplate}
