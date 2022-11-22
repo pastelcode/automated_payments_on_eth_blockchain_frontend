@@ -1,5 +1,38 @@
 part of 'custom_app_bar.dart';
 
+enum _ThemeModes {
+  light(
+    themeMode: ThemeMode.light,
+    name: 'Light',
+    icon: FlutterRemix.sun_line,
+    selectedIcon: FlutterRemix.sun_fill,
+  ),
+  dark(
+    themeMode: ThemeMode.dark,
+    name: 'Dark',
+    icon: FlutterRemix.moon_line,
+    selectedIcon: FlutterRemix.moon_fill,
+  ),
+  system(
+    themeMode: ThemeMode.system,
+    name: 'System',
+    icon: FlutterRemix.macbook_line,
+    selectedIcon: FlutterRemix.macbook_fill,
+  );
+
+  const _ThemeModes({
+    required this.themeMode,
+    required this.name,
+    required this.icon,
+    required this.selectedIcon,
+  });
+
+  final ThemeMode themeMode;
+  final String name;
+  final IconData icon;
+  final IconData selectedIcon;
+}
+
 class _AppearanceOptionsBottomSheet extends StatelessWidget {
   const _AppearanceOptionsBottomSheet();
 
@@ -19,64 +52,33 @@ class _AppearanceOptionsBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-        BlocBuilder<ThemeBloc, ThemeMode>(
-          builder: (
-            BuildContext context,
-            ThemeMode themeMode,
-          ) {
-            return GridView.count(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              children: <Widget>[
-                _ChangeAppearanceButton(
-                  themeMode: ThemeMode.light,
+    return BlocBuilder<ThemeBloc, ThemeMode>(
+      builder: (
+        BuildContext context,
+        ThemeMode themeMode,
+      ) {
+        return Column(
+          children: <Widget>[
+            for (final mode in _ThemeModes.values)
+              SizedBox(
+                width: double.infinity,
+                child: _ChangeAppearanceButton(
+                  themeMode: mode.themeMode,
                   currentThemeMode: themeMode,
-                  name: 'Light',
-                  icon: const Icon(
-                    FlutterRemix.sun_line,
-                    size: 32,
+                  name: mode.name,
+                  icon: Icon(
+                    mode.icon,
+                    size: 42,
                   ),
-                  selectedIcon: const Icon(
-                    FlutterRemix.sun_fill,
-                    size: 32,
+                  selectedIcon: Icon(
+                    mode.selectedIcon,
+                    size: 42,
                   ),
                 ),
-                _ChangeAppearanceButton(
-                  themeMode: ThemeMode.dark,
-                  currentThemeMode: themeMode,
-                  name: 'Dark',
-                  icon: const Icon(
-                    FlutterRemix.moon_line,
-                    size: 32,
-                  ),
-                  selectedIcon: const Icon(
-                    FlutterRemix.moon_fill,
-                    size: 32,
-                  ),
-                ),
-                _ChangeAppearanceButton(
-                  themeMode: ThemeMode.system,
-                  currentThemeMode: themeMode,
-                  name: 'System',
-                  icon: const Icon(
-                    FlutterRemix.macbook_line,
-                    size: 32,
-                  ),
-                  selectedIcon: const Icon(
-                    FlutterRemix.macbook_fill,
-                    size: 32,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ],
+              ),
+          ],
+        );
+      },
     );
   }
 }
@@ -131,13 +133,10 @@ class _ChangeAppearanceButton extends StatelessWidget {
           vertical: 10,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(
-              child: isSelected ? selectedIcon : icon,
-            ),
+            if (isSelected) selectedIcon else icon,
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Text(
               name,

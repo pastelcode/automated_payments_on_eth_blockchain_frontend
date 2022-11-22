@@ -46,8 +46,7 @@ class _ApplicationMenuBottomSheet extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: <Widget>[
         ListTile(
           title: const Text(
