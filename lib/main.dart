@@ -1,4 +1,5 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/bloc/theme_bloc/theme_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/router/router.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/theme/theme.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';

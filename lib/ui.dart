@@ -16,6 +16,7 @@ class _Ui extends StatelessWidget {
       ) {
         return MaterialApp.router(
           title: 'Automated payments on ETH blockchain',
+          scaffoldMessengerKey: CustomSnackBar.scaffoldMessengerKey,
           scrollBehavior: const _ScrollBehaviorModified(),
           routerConfig: applicationRouter.router,
           theme: ApplicationTheme.lightTheme,

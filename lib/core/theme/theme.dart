@@ -12,16 +12,6 @@ mixin ApplicationTheme {
   /// The height for global app bars.
   static double get appBarHeight => 85;
 
-  static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              borderRadius,
-            ),
-          ),
-        ),
-      );
-
   static ColorScheme get _lightColorScheme => ColorScheme.fromSeed(
         seedColor: primaryColor,
       );
@@ -77,7 +67,15 @@ mixin ApplicationTheme {
         ),
         // actionsPadding: EdgeInsets.zero,
       ),
-      inputDecorationTheme: _inputDecorationTheme,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              borderRadius,
+            ),
+          ),
+        ),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: buttonStyle,
       ),
@@ -88,6 +86,18 @@ mixin ApplicationTheme {
         style: buttonStyle,
       ),
       errorColor: colorScheme.error,
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            borderRadius,
+          ),
+        ),
+        contentTextStyle: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
