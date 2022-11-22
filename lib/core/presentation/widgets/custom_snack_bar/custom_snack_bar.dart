@@ -6,6 +6,9 @@ mixin CustomSnackBar {
   /// The [ScaffoldMessengerState] to pass to root [MaterialApp].
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
+  // TODO(pastelcode): Create a base snackbar and in external functions change
+  // only the background color.
+
   /// Shows a snack bar with blue background and an information prefix icon.
   static void showInformationSnackBar({
     required String message,
