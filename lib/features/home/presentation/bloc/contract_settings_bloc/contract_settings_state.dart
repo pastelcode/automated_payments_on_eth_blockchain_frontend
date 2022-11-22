@@ -7,25 +7,25 @@ class ContractSettingsState extends Equatable {
   /// {@macro contract_settings_state}
   const ContractSettingsState({
     required this.members,
-    required this.lapses,
+    required this.lapse,
     required this.duration,
     this.failure,
   });
 
   final List<ContractMember> members;
-  final ContractLapse lapses;
+  final ContractLapse lapse;
   final ContractDuration duration;
   final Failure? failure;
 
   ContractSettingsState copyWith({
     List<ContractMember>? members,
-    ContractLapse? lapses,
+    ContractLapse? lapse,
     ContractDuration? duration,
     Failure? failure,
   }) {
     return ContractSettingsState(
       members: members ?? this.members,
-      lapses: lapses ?? this.lapses,
+      lapse: lapse ?? this.lapse,
       duration: duration ?? this.duration,
       failure: failure,
     );
@@ -34,7 +34,7 @@ class ContractSettingsState extends Equatable {
   @override
   List<Object?> get props => [
         members,
-        lapses,
+        lapse,
         duration,
         failure,
       ];

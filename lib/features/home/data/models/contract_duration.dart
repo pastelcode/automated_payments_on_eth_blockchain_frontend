@@ -14,14 +14,14 @@ class ContractDuration extends Equatable {
   /// The end of this contract in number.
   ///
   /// For example: 2, 6, 8.
-  final String? end;
+  final int? end;
 
   /// The unit of the time for [end].
   final DurationUnit? unit;
 
   /// Copies this class with given parameters.
   ContractDuration copyWith({
-    String? end,
+    int? end,
     DurationUnit? unit,
   }) {
     return ContractDuration(

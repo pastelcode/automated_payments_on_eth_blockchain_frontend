@@ -1,6 +1,9 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// {@template home_page}
 /// A initial page to show as the home.
@@ -17,6 +20,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _formKeyToValidate = GlobalKey<FormState>();
+
+  void _updateDuration({
+    String? duration,
+    DurationUnit? unit,
+  }) {
+    context.read<ContractSettingsBloc>().add(
+          UpdateDuration(
+            end: duration,
+            unit: unit,
+          ),
+        );
+  }
+
+  void _updateLapse({
+    String? duration,
+    DurationUnit? unit,
+  }) {
+    context.read<ContractSettingsBloc>().add(
+          UpdateLapse(
+            every: duration,
+            unit: unit,
+          ),
+        );
+  }
 
   @override
   Widget build(
@@ -43,11 +70,29 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: <Widget>[
               const MembersTile(),
-              const LapsesTile(),
               const _Gap(),
               Form(
                 key: _formKeyToValidate,
-                child: const DurationFormContent(),
+                child: Column(
+                  children: <Widget>[
+                    DurationFormContent(
+                      title: 'Lapse',
+                      labelForDurationTextField: 'Every',
+                      errorMessageForDurationTextField:
+                          'Set a lapse for the contract',
+                      onFieldsChange: _updateLapse,
+                    ),
+                    const _Gap(),
+                    const _Gap(),
+                    DurationFormContent(
+                      title: 'Duration',
+                      labelForDurationTextField: 'Ends in',
+                      errorMessageForDurationTextField:
+                          'Set an end for the contract',
+                      onFieldsChange: _updateDuration,
+                    ),
+                  ],
+                ),
               ),
               const _Gap(),
               const _Gap(),

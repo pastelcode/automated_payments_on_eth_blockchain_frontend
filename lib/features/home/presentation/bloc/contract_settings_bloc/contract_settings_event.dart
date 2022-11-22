@@ -82,3 +82,26 @@ class UpdateDuration extends ContractSettingsEvent {
         unit,
       ];
 }
+
+/// {@template update_lapse}
+/// An event to update the lapse of the main contract.
+/// {endtemplate}
+class UpdateLapse extends ContractSettingsEvent {
+  /// {@macro update_lapse}
+  const UpdateLapse({
+    this.every,
+    this.unit,
+  });
+
+  /// The lapse for the main contract.
+  final String? every;
+
+  /// The time unit for [every].
+  final DurationUnit? unit;
+
+  @override
+  List<Object?> get props => [
+        every,
+        unit,
+      ];
+}

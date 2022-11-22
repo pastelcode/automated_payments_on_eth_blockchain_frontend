@@ -15,6 +15,7 @@ part 'contract_settings_state.dart';
 /// - [RemoveMember]
 /// - [ResetFailure]
 /// - [UpdateDuration]
+/// - [UpdateLapse]
 ///
 /// States:
 /// - [ContractSettingsState]
@@ -26,7 +27,7 @@ class ContractSettingsBloc
       : super(
           const ContractSettingsState(
             members: <ContractMember>[],
-            lapses: ContractLapse(
+            lapse: ContractLapse(
               every: null,
               unit: null,
             ),
@@ -47,6 +48,9 @@ class ContractSettingsBloc
     );
     on<UpdateDuration>(
       _handleUpdateDuration,
+    );
+    on<UpdateLapse>(
+      _handleUpdateLapse,
     );
   }
 
@@ -123,12 +127,32 @@ class ContractSettingsBloc
     emit(
       state.copyWith(
         duration: state.duration.copyWith(
-          end: event.end,
+          end: event.end != null
+              ? int.parse(
+                  event.end!,
+                )
+              : null,
           unit: event.unit,
         ),
       ),
     );
   }
 
-  // TODO(pastelcode): Add a handler for [UpdateLapses]
+  void _handleUpdateLapse(
+    UpdateLapse event,
+    Emitter<ContractSettingsState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        lapse: state.lapse.copyWith(
+          every: event.every != null
+              ? int.parse(
+                  event.every!,
+                )
+              : null,
+          unit: event.unit,
+        ),
+      ),
+    );
+  }
 }

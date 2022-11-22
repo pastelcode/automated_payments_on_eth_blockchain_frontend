@@ -6,38 +6,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// {@template duration_form_content}
 /// A form content to set the duration of the main contract.
 /// {@endtemplate}
-class DurationFormContent extends StatefulWidget {
+class DurationFormContent extends StatelessWidget {
   /// {@macro duration_form_content}
   const DurationFormContent({
     super.key,
+    required this.title,
+    required this.labelForDurationTextField,
+    required this.errorMessageForDurationTextField,
+    required this.onFieldsChange,
   });
 
-  @override
-  State<DurationFormContent> createState() => _DurationFormContentState();
-}
+  /// The title for this duration form.
+  final String title;
 
-class _DurationFormContentState extends State<DurationFormContent> {
-  late TextEditingController _endController;
-  final _unit = ValueNotifier<DurationUnit?>(null);
+  /// The label for duration text field.
+  final String labelForDurationTextField;
 
-  @override
-  void initState() {
-    super.initState();
-    _endController = TextEditingController();
-  }
+  /// The error message for duration text field if its value can't be parsed
+  /// to [int].
+  final String errorMessageForDurationTextField;
 
-  void _updateDuration({
-    required BuildContext context,
-    String? end,
+  final void Function({
+    String? duration,
     DurationUnit? unit,
-  }) {
-    context.read<ContractSettingsBloc>().add(
-          UpdateDuration(
-            end: end,
-            unit: unit,
-          ),
-        );
-  }
+  }) onFieldsChange;
 
   @override
   Widget build(
@@ -51,8 +43,8 @@ class _DurationFormContentState extends State<DurationFormContent> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'Duration',
+            Text(
+              title,
             ),
             const SizedBox(
               height: 15,
@@ -63,12 +55,11 @@ class _DurationFormContentState extends State<DurationFormContent> {
                 Expanded(
                   flex: 2,
                   child: TextFormField(
-                    controller: _endController,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       label: Text(
-                        'Ends in',
+                        labelForDurationTextField,
                       ),
                       hintText: '4',
                     ),
@@ -81,16 +72,15 @@ class _DurationFormContentState extends State<DurationFormContent> {
                                 value,
                               ) ==
                               null) {
-                        return 'Set an end for the contract';
+                        return errorMessageForDurationTextField;
                       }
                       return null;
                     },
                     onChanged: (
                       String value,
                     ) {
-                      _updateDuration(
-                        context: context,
-                        end: value,
+                      onFieldsChange(
+                        duration: value,
                       );
                     },
                   ),
@@ -106,8 +96,7 @@ class _DurationFormContentState extends State<DurationFormContent> {
                     onChanged: (
                       DurationUnit? unit,
                     ) {
-                      _updateDuration(
-                        context: context,
+                      onFieldsChange(
                         unit: unit,
                       );
                     },
@@ -144,11 +133,5 @@ class _DurationFormContentState extends State<DurationFormContent> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _endController.dispose();
-    super.dispose();
   }
 }
