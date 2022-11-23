@@ -1,4 +1,4 @@
-import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/errors/errors.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/data/models/models.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:equatable/equatable.dart';
@@ -49,6 +49,9 @@ class ContractSettingsBloc
     on<UpdateLapse>(
       _handleUpdateLapse,
     );
+    on<ValidateMembersPercent>(
+      _handleValidateMembersPercent,
+    );
   }
 
   void _handleAddMember(
@@ -64,8 +67,16 @@ class ContractSettingsBloc
         ) !=
         -1;
     if (doesUserAlreadyExist) {
-      CustomSnackBar.showErrorSnackBar(
-        message: 'Member already added',
+      emit(
+        state.copyWith(
+          failure: AnotherFailure(
+            message: 'Member already added',
+          ),
+        ),
+      );
+      // Emits a state with a null failure
+      emit(
+        state.copyWith(),
       );
       return;
     }
@@ -137,5 +148,55 @@ class ContractSettingsBloc
         ),
       ),
     );
+  }
+
+  void _handleValidateMembersPercent(
+    ValidateMembersPercent event,
+    Emitter<ContractSettingsState> emit,
+  ) {
+    if (state.members.isEmpty) {
+      emit(
+        state.copyWith(
+          failure: AnotherFailure(
+            message: 'Add at least one member to continue',
+          ),
+        ),
+      );
+      // Emits a state with a null failure
+      emit(
+        state.copyWith(),
+      );
+      return;
+    }
+
+    final percents = state.members.map(
+      (
+        ContractMember contractMember,
+      ) {
+        return contractMember.percent;
+      },
+    );
+    final isMembersPercentSumEqualTo100 = percents.reduce(
+      (
+        num currentSum,
+        num percent,
+      ) {
+        return currentSum + percent;
+      },
+    );
+    if (isMembersPercentSumEqualTo100 != 100) {
+      emit(
+        state.copyWith(
+          failure: AnotherFailure(
+            message: 'Members percents must sum 100',
+          ),
+        ),
+      );
+      // Emits a state with a null failure
+      emit(
+        state.copyWith(),
+      );
+      return;
+    }
   }
 }

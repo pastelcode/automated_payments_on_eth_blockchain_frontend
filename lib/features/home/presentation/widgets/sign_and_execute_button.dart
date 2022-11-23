@@ -1,5 +1,7 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// {@template sign_and_execute_button}
 /// A button to sign members for the contract and execute it.
@@ -19,14 +21,30 @@ class SignAndExecuteButton extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return Button(
-      onPressed: () {
-        formKeyToValidate.currentState?.validate();
+    return BlocListener<ContractSettingsBloc, ContractSettingsState>(
+      listener: (
+        BuildContext context,
+        ContractSettingsState contractSettingsState,
+      ) {
+        if (contractSettingsState.failure != null) {
+          CustomSnackBar.showErrorSnackBar(
+            message: contractSettingsState.failure!.message,
+          );
+        }
       },
-      title: const Text(
-        'Sign members and execute',
+      child: Button(
+        onPressed: () {
+          if (formKeyToValidate.currentState!.validate()) {
+            context.read<ContractSettingsBloc>().add(
+                  const ValidateMembersPercent(),
+                );
+          }
+        },
+        title: const Text(
+          'Sign members and execute',
+        ),
+        isPrimary: true,
       ),
-      isPrimary: true,
     );
   }
 }

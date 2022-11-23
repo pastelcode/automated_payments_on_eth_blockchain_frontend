@@ -9,21 +9,25 @@ class ContractSettingsState extends Equatable {
     required this.members,
     required this.lapse,
     required this.duration,
+    this.failure,
   });
 
   final List<ContractMember> members;
   final ContractLapse lapse;
   final ContractDuration duration;
+  final Failure? failure;
 
   ContractSettingsState copyWith({
     List<ContractMember>? members,
     ContractLapse? lapse,
     ContractDuration? duration,
+    Failure? failure,
   }) {
     return ContractSettingsState(
       members: members ?? this.members,
       lapse: lapse ?? this.lapse,
       duration: duration ?? this.duration,
+      failure: failure,
     );
   }
 
@@ -32,5 +36,6 @@ class ContractSettingsState extends Equatable {
         members,
         lapse,
         duration,
+        failure,
       ];
 }

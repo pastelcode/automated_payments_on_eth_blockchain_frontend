@@ -97,3 +97,11 @@ class UpdateLapse extends ContractSettingsEvent {
         unit,
       ];
 }
+
+/// {@template validate_members_percents}
+/// An event to validate the sum of members percents is equal to 100.
+/// {@endtemplate}
+class ValidateMembersPercent extends ContractSettingsEvent {
+  /// {@macro validate_members_percent}
+  const ValidateMembersPercent();
+}

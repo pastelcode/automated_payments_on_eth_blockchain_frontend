@@ -49,7 +49,17 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
   Widget build(
     BuildContext context,
   ) {
-    return BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+    return BlocConsumer<ContractSettingsBloc, ContractSettingsState>(
+      listener: (
+        BuildContext context,
+        ContractSettingsState contractSettingsState,
+      ) {
+        if (contractSettingsState.failure != null) {
+          CustomSnackBar.showErrorSnackBar(
+            message: contractSettingsState.failure!.message,
+          );
+        }
+      },
       builder: (
         BuildContext context,
         ContractSettingsState contractSettingsState,
