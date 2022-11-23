@@ -57,22 +57,21 @@ class _AppearanceOptionsBottomSheet extends StatelessWidget {
         BuildContext context,
         ThemeMode themeMode,
       ) {
-        return Column(
+        return Row(
           children: <Widget>[
             for (final mode in _ThemeModes.values)
-              SizedBox(
-                width: double.infinity,
+              Expanded(
                 child: _ChangeAppearanceButton(
                   themeMode: mode.themeMode,
                   currentThemeMode: themeMode,
                   name: mode.name,
                   icon: Icon(
                     mode.icon,
-                    size: 42,
+                    size: 36,
                   ),
                   selectedIcon: Icon(
                     mode.selectedIcon,
-                    size: 42,
+                    size: 36,
                   ),
                 ),
               ),

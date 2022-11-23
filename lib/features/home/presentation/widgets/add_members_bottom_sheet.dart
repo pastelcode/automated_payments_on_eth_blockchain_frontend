@@ -73,6 +73,9 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
                     children: <Widget>[
                       if (contractSettingsState.members.isEmpty)
                         const NoMembersBanner(),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Button(
                         onPressed: _showNewMemberForm,
                         icon: const Icon(
@@ -106,7 +109,7 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
               },
             ),
             const SizedBox(
-              height: 5,
+              height: 15,
             ),
             SizedBox(
               width: double.infinity,
