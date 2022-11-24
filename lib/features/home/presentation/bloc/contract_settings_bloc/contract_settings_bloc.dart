@@ -34,6 +34,7 @@ class ContractSettingsBloc
               end: null,
               unit: null,
             ),
+            isValidated: false,
           ),
         ) {
     on<AddMember>(
@@ -154,6 +155,7 @@ class ContractSettingsBloc
     ValidateMembersPercent event,
     Emitter<ContractSettingsState> emit,
   ) {
+    // |- Validate if members list is not empty
     if (state.members.isEmpty) {
       emit(
         state.copyWith(
@@ -168,35 +170,46 @@ class ContractSettingsBloc
       );
       return;
     }
+    // Validate if members list is not empty -|
 
-    final percents = state.members.map(
-      (
-        ContractMember contractMember,
-      ) {
-        return contractMember.percent;
-      },
-    );
-    final isMembersPercentSumEqualTo100 = percents.reduce(
-      (
-        num currentSum,
-        num percent,
-      ) {
-        return currentSum + percent;
-      },
-    );
-    if (isMembersPercentSumEqualTo100 != 100) {
-      emit(
-        state.copyWith(
-          failure: AnotherFailure(
-            message: 'Members percents must sum 100',
+    // |- Validate if members percents sum is 100
+    {
+      final percents = state.members.map(
+        (
+          ContractMember contractMember,
+        ) {
+          return contractMember.percent;
+        },
+      );
+      final isMembersPercentSumEqualTo100 = percents.reduce(
+        (
+          num currentSum,
+          num percent,
+        ) {
+          return currentSum + percent;
+        },
+      );
+      if (isMembersPercentSumEqualTo100 != 100) {
+        emit(
+          state.copyWith(
+            failure: AnotherFailure(
+              message: 'Members percents must sum 100',
+            ),
           ),
-        ),
-      );
-      // Emits a state with a null failure
-      emit(
-        state.copyWith(),
-      );
-      return;
+        );
+        // Emits a state with a null failure
+        emit(
+          state.copyWith(),
+        );
+        return;
+      }
     }
+    // Validate if members percents sum is 100 -|
+
+    emit(
+      state.copyWith(
+        isValidated: true,
+      ),
+    );
   }
 }
