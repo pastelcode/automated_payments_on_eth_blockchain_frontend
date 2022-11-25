@@ -44,7 +44,7 @@ class RemoveMember extends ContractSettingsEvent {
   });
 
   /// The member to be deleted.
-  final ContractMember member;
+  final ContractMemberModel member;
 
   @override
   List<Object?> get props => [

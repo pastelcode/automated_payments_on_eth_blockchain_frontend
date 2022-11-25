@@ -18,7 +18,7 @@ class MembersList extends StatelessWidget {
 
   void _removeMember({
     required BuildContext context,
-    required ContractMember member,
+    required ContractMemberModel member,
   }) {
     context.read<ContractSettingsBloc>().add(
           RemoveMember(

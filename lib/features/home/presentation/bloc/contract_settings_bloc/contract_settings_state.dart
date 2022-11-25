@@ -14,13 +14,13 @@ class ContractSettingsState extends Equatable {
   });
 
   /// The members for the main contract.
-  final List<ContractMember> members;
+  final List<ContractMemberModel> members;
 
   /// The lapse of payment for the main contract.
-  final ContractLapse lapse;
+  final ContractLapseModel lapse;
 
   /// The duration for the main contract.
-  final ContractDuration duration;
+  final ContractDurationModel duration;
 
   /// A possible failure while adding members or validating the contract
   /// settings.
@@ -33,9 +33,9 @@ class ContractSettingsState extends Equatable {
   /// Returns a copy of this [ContractSettingsState] with replaced given
   /// parameters.
   ContractSettingsState copyWith({
-    List<ContractMember>? members,
-    ContractLapse? lapse,
-    ContractDuration? duration,
+    List<ContractMemberModel>? members,
+    ContractLapseModel? lapse,
+    ContractDurationModel? duration,
     Failure? failure,
     bool? isValidated,
   }) {

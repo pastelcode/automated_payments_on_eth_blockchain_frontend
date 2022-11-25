@@ -1,34 +1,27 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
-/// {@template duration}
+/// {@template contractSettings.domain.entities.contractDuration}
 /// The duration for the main contract.
 /// {@endtemplate}
 class ContractDuration extends Equatable {
-  /// {@macro duration}
+  /// {@macro contractSettings.domain.entities.contractDuration}
   const ContractDuration({
     required this.end,
     required this.unit,
   });
 
+  /// {@template contractSettings.domain.entities.contractDuration.end}
   /// The end of this contract in number.
   ///
   /// For example: 2, 6, 8.
+  /// {@endtemplate}
   final int? end;
 
+  /// {@template contractSettings.domain.entities.contractDuration.unit}
   /// The unit of the time for [end].
+  /// {@endtemplate}
   final DurationUnit? unit;
-
-  /// Copies this class with given parameters.
-  ContractDuration copyWith({
-    int? end,
-    DurationUnit? unit,
-  }) {
-    return ContractDuration(
-      end: end ?? this.end,
-      unit: unit ?? this.unit,
-    );
-  }
 
   @override
   List<Object?> get props => [
