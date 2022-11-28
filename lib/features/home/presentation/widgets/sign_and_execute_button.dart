@@ -1,5 +1,6 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/contract_settings_bloc/contract_settings_bloc.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/features/home/presentation/bloc/sign_and_execute_contract_bloc/sign_and_execute_contract_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,6 +31,11 @@ class SignAndExecuteButton extends StatelessWidget {
           CustomSnackBar.showErrorSnackBar(
             message: contractSettingsState.failure!.message,
           );
+        }
+        if (contractSettingsState.isValidated) {
+          context.read<SignAndExecuteContractBloc>().add(
+                const SignAndExecuteContract(),
+              );
         }
       },
       child: Button(

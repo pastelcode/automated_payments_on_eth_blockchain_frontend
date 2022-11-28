@@ -7,16 +7,20 @@ class SignAndExecuteContractState extends Equatable {
   /// {@macro sign_and_execute_contract_state}
   const SignAndExecuteContractState({
     required this.members,
-    required this.lapseds,
+    required this.lapse,
     required this.duration,
     required this.membersSigning,
+    required this.isLoading,
   });
+
+  /// Whether the contract is waiting to be executed.
+  final bool isLoading;
 
   /// The status for members registering.
   final OptionStatus members;
 
-  /// The status for lapseds registering.
-  final OptionStatus lapseds;
+  /// The status for lapse registering.
+  final OptionStatus lapse;
 
   /// The status for duration registering.
   final OptionStatus duration;
@@ -24,10 +28,28 @@ class SignAndExecuteContractState extends Equatable {
   /// The status for members signing.
   final OptionStatus membersSigning;
 
+  /// Returns a copy of this state with replaced given parameters.
+  SignAndExecuteContractState copyWith({
+    bool? isLoading,
+    OptionStatus? members,
+    OptionStatus? lapse,
+    OptionStatus? duration,
+    OptionStatus? membersSigning,
+  }) {
+    return SignAndExecuteContractState(
+      isLoading: isLoading ?? this.isLoading,
+      members: members ?? this.members,
+      lapse: lapse ?? this.lapse,
+      duration: duration ?? this.lapse,
+      membersSigning: membersSigning ?? this.lapse,
+    );
+  }
+
   @override
   List<Object> get props => [
+        isLoading,
         members,
-        lapseds,
+        lapse,
         duration,
         membersSigning,
       ];
@@ -52,8 +74,21 @@ class OptionStatus extends Equatable {
   /// Whether it is loading.
   final bool isLoading;
 
-  /// The possible failure it something went wrong.
+  /// The possible failure if something went wrong.
   final Failure? failure;
+
+  /// Returns a copy of this [OptionStatus] with replaced given parameters.
+  OptionStatus copyWith({
+    bool? wasSuccessful,
+    bool? isLoading,
+    Failure? failure,
+  }) {
+    return OptionStatus(
+      wasSuccessful: wasSuccessful ?? this.wasSuccessful,
+      isLoading: isLoading ?? this.isLoading,
+      failure: failure ?? this.failure,
+    );
+  }
 
   @override
   List<Object?> get props => [

@@ -20,6 +20,7 @@ class SignAndExecuteContractBloc
   SignAndExecuteContractBloc()
       : super(
           const SignAndExecuteContractState(
+            isLoading: false,
             members: OptionStatus(
               failure: null,
               wasSuccessful: null,
@@ -30,7 +31,7 @@ class SignAndExecuteContractBloc
               wasSuccessful: null,
               isLoading: false,
             ),
-            lapseds: OptionStatus(
+            lapse: OptionStatus(
               failure: null,
               wasSuccessful: null,
               isLoading: false,
