@@ -122,7 +122,7 @@ class AboutBottomSheet extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            GestureDetector(
+            InkWell(
               onTap: () async {
                 await launchUri(
                   context: context,
@@ -133,13 +133,14 @@ class AboutBottomSheet extends StatelessWidget {
                 '@pastelcode',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),
             const Text(
               ' and ',
             ),
-            GestureDetector(
+            InkWell(
               onTap: () async {
                 await launchUri(
                   context: context,
@@ -150,6 +151,7 @@ class AboutBottomSheet extends StatelessWidget {
                 '@xellDart',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),
@@ -164,7 +166,7 @@ class AboutBottomSheet extends StatelessWidget {
             const Text(
               'on ',
             ),
-            GestureDetector(
+            InkWell(
               onTap: () async {
                 await launchUri(
                   context: context,
@@ -175,6 +177,7 @@ class AboutBottomSheet extends StatelessWidget {
                 '@Distbit',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),
