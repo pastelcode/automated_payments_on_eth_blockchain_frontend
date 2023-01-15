@@ -47,6 +47,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: Row(
           children: <Widget>[
+            // The following `SizedBox` is used to add space on large display
+            // devices.
             SizedBox(
               width: MediaQuery.of(
                         context,

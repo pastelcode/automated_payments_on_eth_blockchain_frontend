@@ -55,8 +55,9 @@ class _AddMembersBottomSheetState extends State<AddMembersBottomSheet> {
         ContractSettingsState contractSettingsState,
       ) {
         if (contractSettingsState.failure != null) {
-          CustomSnackBar.showErrorSnackBar(
+          CustomSnackBar.showSnackBar(
             message: contractSettingsState.failure!.message,
+            type: SnackBarType.error,
           );
         }
       },

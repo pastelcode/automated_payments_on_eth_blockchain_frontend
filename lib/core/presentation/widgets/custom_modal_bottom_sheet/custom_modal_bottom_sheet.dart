@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 ///
 /// If [padding] is null it defaults to `EdgeInsets.symmetric(horizontal: 20)`
 /// for mobile and `EdgeInsets.symmetric(horizontal: 50)` for desktop or large
-/// display devices.`
+/// display devices.
 Future<T?> showCustomModalBottomSheet<T>({
   required BuildContext context,
   Widget? title,

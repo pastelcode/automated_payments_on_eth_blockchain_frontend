@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/bloc/theme_bloc/theme_bloc.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/presentation/widgets/widgets.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/core/router/router.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
+part 'bloc_observer.dart';
 part 'bloc_providers.dart';
 part 'ui.dart';
 
@@ -19,14 +22,13 @@ void main() async {
 
   LicenseRegistry.addLicense(
     () async* {
-      final license = await rootBundle.loadString(
-        'assets/fonts/Inter/OFL.txt',
-      );
       yield LicenseEntryWithLineBreaks(
         <String>[
           'Inter',
         ],
-        license,
+        await rootBundle.loadString(
+          'assets/fonts/Inter.OFL.txt',
+        ),
       );
     },
   );
@@ -42,13 +44,13 @@ void main() async {
     SystemUiMode.edgeToEdge,
   );
 
-  // |- Set up Hydrated Bloc
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
         : await getTemporaryDirectory(),
   );
-  // Set up Hydrated Bloc -|
+
+  Bloc.observer = ApplicationBlocObserver();
 
   runApp(
     const _BlocProviders(

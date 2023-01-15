@@ -5,28 +5,32 @@ import 'package:equatable/equatable.dart';
 part 'exceptions.dart';
 part 'failures.dart';
 
-/// {@template error_type}
+/// {@template core.errors.errorType}
 /// An enum to represent the different types of errors this application has.
 /// {@endtemplate}
 enum _ErrorType {
+  /// {@template core.errors.errorType.exception}
   /// The exception type.
+  /// {@endtemplate}
   exception,
 
+  /// {@template core.errors.errorType.failure}
   /// The failure type.
+  /// {@endtemplate}
   failure;
 
-  /// {@macro error_type}
+  /// {@macro core.errors.errorType}
   const _ErrorType();
 }
 
-/// {@template base_error}
+/// {@template core.errors.baseError}
 /// A custom base class to extend failures and exceptions.
 ///
 /// When an instance of this base error class is created, a log instruction
 /// is automatically triggered.
 /// {@endtemplate}
 abstract class _BaseError extends Equatable {
-  /// {@macro base_error}
+  /// {@macro core.errors.baseError}
   _BaseError({
     required this.message,
     required _ErrorType type,
@@ -38,7 +42,9 @@ abstract class _BaseError extends Equatable {
     );
   }
 
+  /// {@template core.errors.baseError.message}
   /// The message of this error.
+  /// {@endtemplate}
   final String message;
 
   @override

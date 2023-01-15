@@ -7,8 +7,6 @@ class _Ui extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    final applicationRouter = ApplicationRouter();
-
     return BlocBuilder<ThemeBloc, ThemeMode>(
       builder: (
         BuildContext context,
@@ -18,7 +16,7 @@ class _Ui extends StatelessWidget {
           title: 'Automated payments on ETH blockchain',
           scaffoldMessengerKey: CustomSnackBar.scaffoldMessengerKey,
           scrollBehavior: const _ScrollBehaviorModified(),
-          routerConfig: applicationRouter.router,
+          routerConfig: router,
           theme: ApplicationTheme.lightTheme,
           darkTheme: ApplicationTheme.darkTheme,
           themeMode: themeMode,

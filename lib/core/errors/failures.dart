@@ -1,10 +1,10 @@
 part of 'errors.dart';
 
-/// {@template failure}
+/// {@template core.errors.failure}
 /// An interface to represent a failure.
 /// {@endtemplate}
 abstract class Failure extends _BaseError {
-  /// {@macro failure}
+  /// {@macro core.errors.failure}
   Failure({
     required super.message,
   }) : super(
@@ -12,17 +12,27 @@ abstract class Failure extends _BaseError {
         );
 }
 
-/// {@template server_failure}
+/// {@template core.errors.anotherFailure}
+/// An unknown failure.
+/// {@endtemplate}
+class AnotherFailure extends Failure {
+  /// {@macro core.errors.anotherFailure}
+  AnotherFailure({
+    required super.message,
+  });
+}
+
+/// {@template core.errors.serverFailure}
 /// A server failure.
 /// {@endtemplate}
 class ServerFailure extends Failure {
-  /// {@macro server_failure}
+  /// {@macro core.errors.serverFailure}
   ServerFailure({
     required super.message,
     required this.statusCode,
   });
 
-  /// The status code of the failed request.
+  /// {@macro core.errors.serverException.statusCode}
   final int statusCode;
 
   @override
@@ -31,14 +41,4 @@ class ServerFailure extends Failure {
           'statusCode': statusCode,
         },
       ];
-}
-
-/// {@template another_failure}
-/// An unknown failure.
-/// {@endtemplate}
-class AnotherFailure extends Failure {
-  /// {@macro another_failure}
-  AnotherFailure({
-    required super.message,
-  });
 }

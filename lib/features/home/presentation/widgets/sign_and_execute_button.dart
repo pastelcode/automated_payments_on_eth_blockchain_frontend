@@ -28,8 +28,9 @@ class SignAndExecuteButton extends StatelessWidget {
         ContractSettingsState contractSettingsState,
       ) {
         if (contractSettingsState.failure != null) {
-          CustomSnackBar.showErrorSnackBar(
+          CustomSnackBar.showSnackBar(
             message: contractSettingsState.failure!.message,
+            type: SnackBarType.error,
           );
         }
         if (contractSettingsState.isValidated) {
