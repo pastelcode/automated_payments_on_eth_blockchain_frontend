@@ -6,22 +6,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// {@template sign_and_execute_button}
 /// A button to sign members for the contract and execute it.
+///
+/// This must be a child of a `Form` since it extracts a `FormState` to validate
+/// the fields.
 /// {@endtemplate}
 class SignAndExecuteButton extends StatelessWidget {
   /// {@macro sign_and_execute_button}
   const SignAndExecuteButton({
     super.key,
-    required this.formKeyToValidate,
   });
-
-  /// The duration form key to validate before signing and executing the
-  /// contract.
-  final GlobalKey<FormState> formKeyToValidate;
 
   @override
   Widget build(
     BuildContext context,
   ) {
+    final formState = Form.of(
+      context,
+    );
+
     return BlocListener<ContractSettingsBloc, ContractSettingsState>(
       listener: (
         BuildContext context,
@@ -41,7 +43,7 @@ class SignAndExecuteButton extends StatelessWidget {
       },
       child: Button(
         onPressed: () {
-          if (formKeyToValidate.currentState!.validate()) {
+          if (formState!.validate()) {
             context.read<ContractSettingsBloc>().add(
                   const ValidateMembersPercent(),
                 );

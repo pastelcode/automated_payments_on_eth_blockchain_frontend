@@ -19,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _formKeyToValidate = GlobalKey<FormState>();
-
   void _updateDuration({
     String? duration,
     DurationUnit? unit,
@@ -72,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               const MembersTile(),
               const _Gap(),
               Form(
-                key: _formKeyToValidate,
+                key: GlobalKey<FormState>(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -120,13 +118,14 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
+                    const _Gap(),
+                    const _Gap(),
+                    const SizedBox(
+                      width: double.infinity,
+                      child: SignAndExecuteButton(),
+                    ),
                   ],
                 ),
-              ),
-              const _Gap(),
-              const _Gap(),
-              SignAndExecuteButton(
-                formKeyToValidate: _formKeyToValidate,
               ),
             ],
           ),
