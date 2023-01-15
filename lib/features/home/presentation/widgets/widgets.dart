@@ -1,4 +1,6 @@
 export 'add_members_bottom_sheet.dart';
+export 'add_members_bottom_sheet.dart';
+export 'blockchain_address_input.dart';
 export 'duration_form_content.dart';
 export 'lapses_tile.dart';
 export 'member_entry.dart';

@@ -6,12 +6,16 @@ part of 'contract_settings_bloc.dart';
 class ContractSettingsState extends Equatable {
   /// {@macro contract_settings_state}
   const ContractSettingsState({
+    required this.contractAddress,
     required this.members,
     required this.lapse,
     required this.duration,
     this.failure,
     required this.isValidated,
   });
+
+  /// The address of the contract to execute.
+  final String contractAddress;
 
   /// The members for the main contract.
   final List<ContractMemberModel> members;
@@ -33,6 +37,7 @@ class ContractSettingsState extends Equatable {
   /// Returns a copy of this [ContractSettingsState] with replaced given
   /// parameters.
   ContractSettingsState copyWith({
+    String? contractAddress,
     List<ContractMemberModel>? members,
     ContractLapseModel? lapse,
     ContractDurationModel? duration,
@@ -40,6 +45,7 @@ class ContractSettingsState extends Equatable {
     bool? isValidated,
   }) {
     return ContractSettingsState(
+      contractAddress: contractAddress ?? this.contractAddress,
       members: members ?? this.members,
       lapse: lapse ?? this.lapse,
       duration: duration ?? this.duration,
@@ -50,6 +56,7 @@ class ContractSettingsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        contractAddress,
         members,
         lapse,
         duration,

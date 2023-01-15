@@ -1,4 +1,5 @@
 import 'package:automated_payments_on_eth_blockchain_frontend/core/errors/errors.dart';
+import 'package:automated_payments_on_eth_blockchain_frontend/core/extensions/extensions.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/data/models/models.dart';
 import 'package:automated_payments_on_eth_blockchain_frontend/features/home/domain/entities/entities.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +26,7 @@ class ContractSettingsBloc
   ContractSettingsBloc()
       : super(
           const ContractSettingsState(
+            contractAddress: '',
             members: <ContractMemberModel>[],
             lapse: ContractLapseModel(
               every: 1,
@@ -49,6 +51,9 @@ class ContractSettingsBloc
     );
     on<UpdateLapse>(
       _handleUpdateLapse,
+    );
+    on<UpdateContractAddressEvent>(
+      _handleUpdateContractAddress,
     );
     on<ValidateMembersPercent>(
       _handleValidateMembersPercent,
@@ -149,6 +154,20 @@ class ContractSettingsBloc
           every: number == null || number < 1 ? null : number,
           unit: event.unit,
         ),
+      ),
+    );
+  }
+
+  void _handleUpdateContractAddress(
+    UpdateContractAddressEvent event,
+    Emitter<ContractSettingsState> emit,
+  ) {
+    if (!event.address.isValidBlockchainAddress) {
+      return;
+    }
+    emit(
+      state.copyWith(
+        contractAddress: event.address,
       ),
     );
   }

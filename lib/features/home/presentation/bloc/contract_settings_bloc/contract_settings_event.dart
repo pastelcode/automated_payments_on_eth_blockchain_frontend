@@ -98,6 +98,25 @@ class UpdateLapse extends ContractSettingsEvent {
       ];
 }
 
+/// {@template home.presentation.bloc.updateContractAddressEvent}
+/// An event to update the address of the contract to execute on contract
+/// settings.
+/// {@endtemplate}
+class UpdateContractAddressEvent extends ContractSettingsEvent {
+  /// {@macro home.presentation.bloc.updateContractAddressEvent}
+  const UpdateContractAddressEvent({
+    required this.address,
+  });
+
+  /// The contract address to add to the contract settings.
+  final String address;
+
+  @override
+  List<Object?> get props => [
+        address,
+      ];
+}
+
 /// {@template validate_members_percents}
 /// An event to validate the sum of members percents is equal to 100.
 /// {@endtemplate}

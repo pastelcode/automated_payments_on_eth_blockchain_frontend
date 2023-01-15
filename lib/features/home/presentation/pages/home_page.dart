@@ -43,6 +43,16 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
+  void _updateContractAddress(
+    String address,
+  ) {
+    context.read<ContractSettingsBloc>().add(
+          UpdateContractAddressEvent(
+            address: address,
+          ),
+        );
+  }
+
   @override
   Widget build(
     BuildContext context,
@@ -74,6 +84,15 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    const Text(
+                      'Contract address',
+                    ),
+                    const _Gap(),
+                    BlockchainAddressInput(
+                      onChanged: _updateContractAddress,
+                    ),
+                    const _Gap(),
+                    const _Gap(),
                     const Text(
                       'Lapse',
                     ),
