@@ -26,8 +26,14 @@ class ContractSettingsBloc
       : super(
           const ContractSettingsState(
             members: <ContractMemberModel>[],
-            lapse: ContractLapseModel(),
-            duration: ContractDurationModel(),
+            lapse: ContractLapseModel(
+              every: 1,
+              unit: DurationUnit.day,
+            ),
+            duration: ContractDurationModel(
+              end: 1,
+              unit: DurationUnit.month,
+            ),
             isValidated: false,
           ),
         ) {
@@ -113,14 +119,15 @@ class ContractSettingsBloc
     UpdateDuration event,
     Emitter<ContractSettingsState> emit,
   ) {
+    final number = event.end != null
+        ? int.tryParse(
+            event.end!,
+          )
+        : null;
     emit(
       state.copyWith(
         duration: state.duration.copyWith(
-          end: event.end != null
-              ? int.parse(
-                  event.end!,
-                )
-              : null,
+          end: number == null || number < 1 ? null : number,
           unit: event.unit,
         ),
       ),
@@ -131,14 +138,15 @@ class ContractSettingsBloc
     UpdateLapse event,
     Emitter<ContractSettingsState> emit,
   ) {
+    final number = event.every != null
+        ? int.tryParse(
+            event.every!,
+          )
+        : null;
     emit(
       state.copyWith(
         lapse: state.lapse.copyWith(
-          every: event.every != null
-              ? int.parse(
-                  event.every!,
-                )
-              : null,
+          every: number == null || number < 1 ? null : number,
           unit: event.unit,
         ),
       ),

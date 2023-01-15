@@ -12,8 +12,8 @@ import 'package:equatable/equatable.dart';
 class ContractDurationModel extends Equatable with ModelOf<ContractDuration> {
   /// {@macro contractSettings.domain.entities.contractDuration}
   const ContractDurationModel({
-    this.end,
-    this.unit,
+    required this.end,
+    required this.unit,
   });
 
   /// {@macro contractSettings.domain.entities.contractDuration}
@@ -42,10 +42,10 @@ class ContractDurationModel extends Equatable with ModelOf<ContractDuration> {
   }
 
   /// {@macro contractSettings.domain.entities.contractDuration.end}
-  final int? end;
+  final int end;
 
   /// {@macro contractSettings.domain.entities.contractDuration.unit}
-  final DurationUnit? unit;
+  final DurationUnit unit;
 
   @override
   ContractDurationModel copyWith({
@@ -69,7 +69,7 @@ class ContractDurationModel extends Equatable with ModelOf<ContractDuration> {
   Map<String, dynamic> toMap() {
     return {
       'end': end,
-      'unit': unit?.name,
+      'unit': unit.name,
     };
   }
 

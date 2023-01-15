@@ -74,22 +74,51 @@ class _HomePageState extends State<HomePage> {
               Form(
                 key: _formKeyToValidate,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    DurationFormContent(
-                      title: 'Lapse',
-                      labelForDurationTextField: 'Every',
-                      errorMessageForDurationTextField:
-                          'Set a lapse for the contract',
-                      onFieldsChange: _updateLapse,
+                    const Text(
+                      'Lapse',
+                    ),
+                    const _Gap(),
+                    BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+                      builder: (
+                        BuildContext context,
+                        ContractSettingsState contractSettingsState,
+                      ) {
+                        return DurationFormContent(
+                          labelForDurationTextField: 'Every',
+                          errorMessageForDurationTextField:
+                              'Set a valid lapse for the contract',
+                          initialDurationValue:
+                              contractSettingsState.lapse.every,
+                          initialDurationUnitValue:
+                              contractSettingsState.lapse.unit,
+                          onFieldsChange: _updateLapse,
+                        );
+                      },
                     ),
                     const _Gap(),
                     const _Gap(),
-                    DurationFormContent(
-                      title: 'Duration',
-                      labelForDurationTextField: 'Ends in',
-                      errorMessageForDurationTextField:
-                          'Set an end for the contract',
-                      onFieldsChange: _updateDuration,
+                    const Text(
+                      'Duration',
+                    ),
+                    const _Gap(),
+                    BlocBuilder<ContractSettingsBloc, ContractSettingsState>(
+                      builder: (
+                        BuildContext context,
+                        ContractSettingsState contractSettingsState,
+                      ) {
+                        return DurationFormContent(
+                          labelForDurationTextField: 'Ends in',
+                          errorMessageForDurationTextField:
+                              'Set a valid end for the contract',
+                          initialDurationValue:
+                              contractSettingsState.duration.end,
+                          initialDurationUnitValue:
+                              contractSettingsState.duration.unit,
+                          onFieldsChange: _updateDuration,
+                        );
+                      },
                     ),
                   ],
                 ),

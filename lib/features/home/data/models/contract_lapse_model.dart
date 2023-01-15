@@ -12,8 +12,8 @@ import 'package:equatable/equatable.dart';
 class ContractLapseModel extends Equatable with ModelOf<ContractLapse> {
   /// {@macro contractSettings.domain.entities.contractLapse}
   const ContractLapseModel({
-    this.every,
-    this.unit,
+    required this.every,
+    required this.unit,
   });
 
   /// {@macro contractSettings.domain.entities.contractLapse}
@@ -44,10 +44,10 @@ class ContractLapseModel extends Equatable with ModelOf<ContractLapse> {
   }
 
   /// {@macro contractSettings.domain.entities.contractLapse.every}
-  final int? every;
+  final int every;
 
   /// {@macro contractSettings.domain.entities.contractLapse.unit}
-  final DurationUnit? unit;
+  final DurationUnit unit;
 
   @override
   ContractLapseModel copyWith({
@@ -71,7 +71,7 @@ class ContractLapseModel extends Equatable with ModelOf<ContractLapse> {
   Map<String, dynamic> toMap() {
     return {
       'every': every,
-      'unit': unit?.name,
+      'unit': unit.name,
     };
   }
 
