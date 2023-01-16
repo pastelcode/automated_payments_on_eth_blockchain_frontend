@@ -91,12 +91,17 @@ mixin ApplicationTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
-            borderRadius,
+            100,
+          ),
+          side: const BorderSide(
+            color: Colors.black12,
           ),
         ),
+        backgroundColor: Colors.white,
         contentTextStyle: const TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
+        actionTextColor: Colors.black,
       ),
     );
   }

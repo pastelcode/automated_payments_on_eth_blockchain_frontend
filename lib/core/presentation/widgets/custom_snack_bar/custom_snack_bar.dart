@@ -17,7 +17,7 @@ enum SnackBarType {
       0xFF1565C0,
     ),
     icon: Icon(
-      FlutterRemix.information_line,
+      FlutterRemix.information_fill,
     ),
   ),
 
@@ -29,7 +29,7 @@ enum SnackBarType {
       0xFFE65100,
     ),
     icon: Icon(
-      FlutterRemix.error_warning_line,
+      FlutterRemix.error_warning_fill,
     ),
   ),
 
@@ -41,7 +41,7 @@ enum SnackBarType {
       0xFFC62828,
     ),
     icon: Icon(
-      FlutterRemix.close_circle_line,
+      FlutterRemix.close_circle_fill,
     ),
   ),
 
@@ -53,7 +53,7 @@ enum SnackBarType {
       0xFF2E7D32,
     ),
     icon: Icon(
-      FlutterRemix.checkbox_circle_line,
+      FlutterRemix.checkbox_circle_fill,
     ),
   ),
 
@@ -66,7 +66,7 @@ enum SnackBarType {
   /// shown.
   loading(
     icon: CustomCircularProgressIndicator(
-      color: Colors.white,
+      color: Colors.black,
       size: 24,
     ),
   );
@@ -98,6 +98,7 @@ mixin CustomSnackBar {
     String? title,
     required String message,
     SnackBarType type = SnackBarType.information,
+    SnackBarAction? action,
   }) {
     scaffoldMessengerKey.currentState!.hideCurrentSnackBar();
     scaffoldMessengerKey.currentState!.showSnackBar(
@@ -105,14 +106,6 @@ mixin CustomSnackBar {
         dismissDirection: type == SnackBarType.loading
             ? DismissDirection.none
             : DismissDirection.down,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              ApplicationTheme.borderRadius,
-            ),
-          ),
-        ),
-        backgroundColor: type.color ?? ApplicationTheme.primaryColor,
         duration: type == SnackBarType.loading
             ? const Duration(
                 days: 1,
@@ -120,51 +113,54 @@ mixin CustomSnackBar {
             : const Duration(
                 milliseconds: 5000,
               ),
-        content: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 7,
-            horizontal: 12,
-          ),
-          child: Row(
-            children: <Widget>[
-              IconTheme(
-                data: const IconThemeData(
-                  color: Colors.white,
+        action: action,
+        content: Row(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(
+                10,
+              ),
+              decoration: BoxDecoration(
+                color:
+                    (type.color ?? ApplicationTheme.primaryColor).withOpacity(
+                  .15,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: IconTheme(
+                data: IconThemeData(
+                  color: type.color ?? ApplicationTheme.primaryColor,
                 ),
                 child: type.icon,
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    if (title != null) ...<Widget>[
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                    ],
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  if (title != null) ...<Widget>[
                     Text(
-                      message,
-                      maxLines: 3,
+                      title,
                       style: const TextStyle(
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                   ],
-                ),
+                  Text(
+                    message,
+                    maxLines: 3,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
